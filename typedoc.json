@@ -1,6 +1,8 @@
 {
   "entryPoints": [
-    "./src/basicFunctions.ts"
+    "./src/Actividad.ts",
+    "./src/Reto.ts",
+    "./src/Ruta.ts",
   ],
   "out": "./docs"
 }
