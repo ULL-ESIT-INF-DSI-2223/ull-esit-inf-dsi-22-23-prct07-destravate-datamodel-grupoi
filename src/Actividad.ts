@@ -4,7 +4,7 @@
  * @param Bicicleta
  * @param Correr
  */
-enum Actividad{
+export enum Actividad{
     Bicicleta,
     Correr,
 }
