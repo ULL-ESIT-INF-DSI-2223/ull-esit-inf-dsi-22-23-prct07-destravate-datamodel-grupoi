@@ -1,1 +1,2 @@
-# Práctica grupal
+# DeStravaTe
+##### Equipo I
