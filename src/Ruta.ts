@@ -59,13 +59,6 @@ export class Ruta{
     get id(): number {
         return this._id;
     }
-    /**
-     * Setter del atributo privado _id
-     * @param value Nuevo valor para el atributo _id
-     */
-    set id(value: number) {
-        this._id = value;
-    }
     /****************************************************************************/
     /**
      * Getter del atributo privado _nombre
