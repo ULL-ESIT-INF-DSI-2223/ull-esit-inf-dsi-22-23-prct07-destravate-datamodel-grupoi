@@ -7,7 +7,8 @@
     "dev": "tsc-watch --onSuccess \"node dist/basicFunctions.js\"",
     "doc": "typedoc",
     "test": "mocha",
-    "coverage": "nyc npm test && nyc report --reporter=lcov"
+    "coverage": "nyc npm test && nyc report --reporter=lcov",
+    "ejer": "tsc-watch --onSuccess \"node dist/Usuario.js\""
   },
   "keywords": [],
   "author": "",
