@@ -1,10 +1,9 @@
 import 'mocha';
 import {expect} from 'chai';
 import {Ruta} from "../src/Ruta";
-import { Geolocalizacion } from '../src/Ruta';
 import {Actividad} from "../src/Actividad"
 
-describe("constructor, set y get de Ruta", () => {
+describe("Ruta: constructor, set y get", () => {
   let usuarios = [1,2,3,6,7]
   let usuarios2 = [8,9,10]
 
@@ -15,6 +14,7 @@ describe("constructor, set y get de Ruta", () => {
 
   let ruta1 = new Ruta("Cabo Verde", loc1, loc2, 10, 6, usuarios, Actividad.Correr, 7)
   let ruta2 = new Ruta("Cabo Rojo", loc3, loc4, 7, 15, [1,2,7], Actividad.Bicicleta, 8.5)
+  
   it("constructor: ids únicos", () => {
     expect(ruta1.id == ruta2.id).to.be.equal(false)
   });

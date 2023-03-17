@@ -1,6 +1,6 @@
 import { Actividad } from "./Actividad";
 import { Ruta } from "./Ruta";
-import { Usuario } from "./Usuario";
+/*import { Usuario } from "./Usuario";*/
 import { GeneradorIdUnicos } from "./GeneradorIdUnicos"
 
 
@@ -14,7 +14,9 @@ export class Reto{
     private _rutas: Ruta[];
     private _actividad: Actividad;
     private _total: number;
-    private _usuarios: Usuario[];
+    //private _usuarios: Usuario[];
+    private _usuarios: number[];
+
 
     /**
      * Constructor de Reto
@@ -23,7 +25,7 @@ export class Reto{
      * @param actividad Tipo de actividad del reto: bicicleta o correr
      * @param usuarios Usuarios que están realizando el reto
      */
-    constructor(nombre: string, rutas: Ruta[], actividad: Actividad, usuarios: Usuario) {
+    constructor(nombre: string, rutas: Ruta[], actividad: Actividad, /*usuarios: Usuario*/ usuarios: number[]) {
         // Se genera el id único
         let generadorId = GeneradorIdUnicos.getInstance();
         this._id = generadorId.generateUniqueId();
@@ -31,6 +33,7 @@ export class Reto{
         this._nombre = nombre;
         this._rutas = rutas;
         this._actividad = actividad;
+        this._total = 0;
         this._rutas.forEach( element =>
             this._total += element.longitud
         );
@@ -98,26 +101,25 @@ export class Reto{
     get total(): number {
         return this._total;
     }
-    /**
-     * Setter del atributo privado _total
-     * @param value Nuevo valor para el atributo _total
-     */
-    set total(value: number) {
-        this._total = value;
-    }
     /****************************************************************************/
     /**
      * Getter del atributo privado _usuarios
      * @return this._usuarios
      */
-    get usuarios(): Usuario[] {
+    /*get usuarios(): Usuario[] {
         return this._usuarios;
-    }
+    }*/
     /**
      * Setter del atributo privado _usuarios
      * @param value Nuevo valor para el atributo _usuarios
      */
-    set usuarios(value: Usuario[]) {
+    /*set usuarios(value: Usuario[]) {
+        this._usuarios = value;
+    }*/
+    get usuarios(): number[] {
+        return this._usuarios;
+    }
+    set usuarios(value: number[]) {
         this._usuarios = value;
     }
 }
