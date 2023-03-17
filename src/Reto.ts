@@ -1,6 +1,7 @@
 import { Actividad } from "./Actividad";
 import { Ruta } from "./Ruta";
 import { Usuario } from "./Usuario";
+import { GeneradorIdUnicos } from "./GeneradorIdUnicos"
 
 
 /**
@@ -8,8 +9,7 @@ import { Usuario } from "./Usuario";
  * @class
  */
 export class Reto{
-    private static _counter = 0;
-    private _id: number;
+    private _id: string;
     private _nombre: string;
     private _rutas: Ruta[];
     private _actividad: Actividad;
@@ -24,8 +24,10 @@ export class Reto{
      * @param usuarios Usuarios que están realizando el reto
      */
     constructor(nombre: string, rutas: Ruta[], actividad: Actividad, usuarios: Usuario) {
-        this._id = Reto._counter;
-        Reto._counter += 1;
+        // Se genera el id único
+        let generadorId = GeneradorIdUnicos.getInstance();
+        this._id = generadorId.generateUniqueId();
+
         this._nombre = nombre;
         this._rutas = rutas;
         this._actividad = actividad;
@@ -40,15 +42,8 @@ export class Reto{
      * Getter del atributo privado _id
      * @return this.id
      */
-    get id(): number {
+    get id(): string {
         return this._id;
-    }
-    /**
-     * Setter del atributo privado _id
-     * @param value Nuevo valor para el atributo _id
-     */
-    set id(value: number) {
-        this._id = value;
     }
     /****************************************************************************/
     /**

@@ -1,4 +1,5 @@
 import { Actividad } from "./Actividad";
+import { GeneradorIdUnicos } from "./GeneradorIdUnicos"
 
 /**
  * Interfaz para la geolocalización
@@ -16,8 +17,7 @@ export interface Geolocalizacion{
  * @class
  */
 export class Ruta{
-    private static _counter = 0;
-    private _id: number;
+    private _id: string;
     private _nombre: string;
     private _inicio: Geolocalizacion;
     private _final: Geolocalizacion;
@@ -39,8 +39,10 @@ export class Ruta{
      * @param calificacion Calificación media de la ruta
      */
     constructor(nombre: string, inicio: Geolocalizacion, final: Geolocalizacion, longitud: number, desnivel: number, usuarios: number[], actividad: Actividad, calificacion: number) {
-        this._id = Ruta._counter;
-        Ruta._counter += 1;
+        // Se genera el id único
+        let generadorId = GeneradorIdUnicos.getInstance();
+        this._id = generadorId.generateUniqueId();
+
         this._nombre = nombre;
         this._inicio = inicio;
         this._final = final;
@@ -56,7 +58,7 @@ export class Ruta{
      * Getter del atributo privado _id
      * @return this.id
      */
-    get id(): number {
+    get id(): string {
         return this._id;
     }
     /****************************************************************************/
