@@ -181,4 +181,19 @@ export class Ruta{
     set calificacion(value: number) {
         this._calificacion = value;
     }
+    /**
+     * Método para enseñar los detalles de la ruta
+     * @returns string con toda la información de la ruta
+     */
+    toString(): string {
+        return `Ruta ${this._nombre}:
+        - Id: ${this._id}
+        - Inicio: (${this._inicio.latitud}, ${this._inicio.longitud})
+        - Final: (${this._final.latitud}, ${this._final.longitud})
+        - Longitud: ${this._longitud} km
+        - Desnivel: ${this._desnivel} m
+        - Actividad: ${this._actividad === Actividad.Bicicleta ? 'Bicicleta' : 'Correr'}
+        - Usuarios: ${this._usuarios.length}
+        - Calificación: ${this._calificacion}`;
+      }
 }
