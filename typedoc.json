@@ -1,6 +1,8 @@
 {
   "entryPoints": [
-    "./src/Grupo.ts"
+    "./src/Actividad.ts",
+    "./src/Reto.ts",
+    "./src/Ruta.ts",
   ],
-  "out": "./docs"
+  "out": "./docs",
 }
