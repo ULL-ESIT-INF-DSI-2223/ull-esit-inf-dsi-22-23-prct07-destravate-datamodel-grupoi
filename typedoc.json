@@ -1,6 +1,6 @@
 {
   "entryPoints": [
-    "./src/basicFunctions.ts"
+    "./src/Grupo.ts"
   ],
   "out": "./docs"
 }
