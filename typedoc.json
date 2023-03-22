@@ -4,5 +4,5 @@
     "./src/Reto.ts",
     "./src/Ruta.ts",
   ],
-  "out": "./docs"
+  "out": "./docs",
 }
