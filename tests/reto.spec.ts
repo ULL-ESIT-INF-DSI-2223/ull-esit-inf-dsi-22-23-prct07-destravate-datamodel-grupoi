@@ -5,8 +5,8 @@ import {Ruta} from "../src/Ruta";
 import {Actividad} from "../src/Actividad"
 
 describe("Reto: constructor, set y get", () => {
-  let usuarios = [1,2,3,6,7]
-  let usuarios2 = [8,9,10]
+  let usuarios = ["id-1" ,"id-2" ,"id-3", "id-6", "id-7"]
+  let usuarios2 = ["id-8", "id-9", "id-10"]
 
   let loc1 = {latitud: 500, longitud:460}
   let loc2 = {latitud: 305, longitud:780}
@@ -14,7 +14,7 @@ describe("Reto: constructor, set y get", () => {
   let loc4 = {latitud: 204, longitud:789}
 
   let ruta1 = new Ruta("Cabo Verde", loc1, loc2, 10, 6, usuarios, Actividad.Correr, 7)
-  let ruta2 = new Ruta("Cabo Rojo", loc3, loc4, 7, 15, [1,2,7], Actividad.Bicicleta, 8.5)
+  let ruta2 = new Ruta("Cabo Rojo", loc3, loc4, 7, 15, ["id-1", "id-2", "id-7"], Actividad.Bicicleta, 8.5)
 
   let rutas = [ruta1, ruta2]
   let rutas2 = [ruta2]
