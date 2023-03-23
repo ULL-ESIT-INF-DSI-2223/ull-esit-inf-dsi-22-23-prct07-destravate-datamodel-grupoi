@@ -14,8 +14,7 @@ export class Reto{
     private _rutas: Ruta[];
     private _actividad: Actividad;
     private _total: number;
-    //private _usuarios: Usuario[];
-    private _usuarios: number[];
+    private _usuarios: string[];
 
 
     /**
@@ -25,7 +24,7 @@ export class Reto{
      * @param actividad Tipo de actividad del reto: bicicleta o correr
      * @param usuarios Usuarios que están realizando el reto
      */
-    constructor(nombre: string, rutas: Ruta[], actividad: Actividad, /*usuarios: Usuario*/ usuarios: number[]) {
+    constructor(nombre: string, rutas: Ruta[], actividad: Actividad, /*usuarios: Usuario*/ usuarios: string[]) {
         // Se genera el id único
         let generadorId = GeneradorIdUnicos.getInstance();
         this._id = generadorId.generateUniqueId();
@@ -102,24 +101,20 @@ export class Reto{
         return this._total;
     }
     /****************************************************************************/
+    
     /**
      * Getter del atributo privado _usuarios
      * @return this._usuarios
      */
-    /*get usuarios(): Usuario[] {
+    get usuarios(): string[] {
         return this._usuarios;
-    }*/
+    }
+
     /**
      * Setter del atributo privado _usuarios
      * @param value Nuevo valor para el atributo _usuarios
      */
-    /*set usuarios(value: Usuario[]) {
-        this._usuarios = value;
-    }*/
-    get usuarios(): number[] {
-        return this._usuarios;
-    }
-    set usuarios(value: number[]) {
+    set usuarios(value: string[]) {
         this._usuarios = value;
     }
 }

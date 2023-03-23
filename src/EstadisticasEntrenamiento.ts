@@ -14,11 +14,9 @@ export class EstadisticasEntrenamiento {
   
   /**
    * Constructor de la clase EstadisticasEntrenamiento
-   * @param km - Número de km recorridos en el entrenamiento
-   * @param desnivel - Desnivel acumulado en el entrenamiento
    */
-  constructor(km: number, desnivel: number) {
-    this.actualizarEstadisticas(km, desnivel);
+  constructor() {
+
   }
   
   /**
@@ -109,9 +107,9 @@ export class EstadisticasEntrenamiento {
   }
 
   /**
-   * Método de utilidad que
-   * @param date 
-   * @returns 
+   * Método de utilidad que pasandole una fecha devuelve el numero de la semana
+   * @param date fecha
+   * @returns numero de la semana de la fecha pasada
    */
   private getWeekNumber(date: Date): number {
     const onejan = new Date(date.getFullYear(), 0, 1);

@@ -1,166 +1,117 @@
 import { GeneradorIdUnicos } from "./GeneradorIdUnicos";
 import {Actividad} from "./Actividad";
+import { EstadisticasEntrenamiento } from "./EstadisticasEntrenamiento";
 
-
+/**
+ * Clase para Usuarios
+ */
 export class Usuario{
-    /**
-     * Atributo para almacenar el id único
-     */
-    private id:string;
-    /**
-     * Atributo para almacenar el nombre del usuario
-     */
-    private nombre:string;
-    /**
-     * Atributo para almacenar array de actividades que realiza el usuario bicicleta ó correr
-     */
-    private actividad:Actividad[];
-    /**
-     * Atributo para almacenar un array de ids de los amigos del usuario
-     */
-    private amigos: string[];
-    /**
-     * Atributo para almacenar un array con los grupos de amigos que tiene el usuario
-     */
-    private grupos: string[]; // GRUPOS CLASE
-    /**
-     * Atributo para almacenar las estadísticas de desnivel y cantidad de km recorridos en la semana mes y año
-     */
-    private estadisticas : {
-        semana: {
-            distancia: number;
-            elevacion: number;
-        };
-        mes: {
-            distancia: number;
-            elevacion: number;
-        };
-        ano:{
-            distancia: number;
-            elevacion: number;
-        };
-    };
+    
+    private _id:string;
+    private _nombre:string;
+    private _actividad:Actividad[];
+    private _amigos: string[];
+    private _grupos: string[]; // _grupos CLASE
+    private _estadisticas : EstadisticasEntrenamiento;
+
+    private _rutas:string[]; // RUTAS CLASE
+    private _retos:string[]; // _retos CLASE
+    private _historicoRutas: Map<string, string[]>;
 
     /**
-     * Atributo para almacenar un array con los ids de las rutas favoritas del usuario
-     */
-    private rutas:string[]; // RUTAS CLASE
-    /**
-     * Atributo para almacenar un string con los ids de los retos que el usuario está realizando actualmente
-     */
-    private retos:string[]; // RETOS CLASE
-    /**
-     * Atributo que almacena el historico de las rutas realizadas, almacenado la fecha y un array con los ids de las rutas realizadas en esa fecha
-     */
-    private historicoRutas: Map<string, string[]>;
-
-    /**
-     * El constructor inicializa el id único del usuario , el nombre pasado y el resto de atributos como vacíos 
-     * @param name nombre del usuario que se quiere crear
+     * El constructor inicializa el id único del usuario , el _nombre pasado y el resto de atributos como vacíos 
+     * @param name _nombre del usuario que se quiere crear
      */
     constructor(name:string){
-        this.nombre = name;
+        this._nombre = name;
         // Se genera el id único
         let generadorId = GeneradorIdUnicos.getInstance();
-        this.id = generadorId.generateUniqueId();
+        this._id = generadorId.generateUniqueId();
 
-        this.actividad =[];
+        this._actividad =[];
     
     
     
-        this.amigos = [];
-        this.grupos = []; // GRUPOS CLASE
-        this.estadisticas = {
-        semana: {
-            distancia: 0,
-            elevacion: 0,
-        },
-        mes: {
-            distancia: 0,
-            elevacion: 0,
-        },
-        ano:{
-            distancia: 0,
-            elevacion: 0,
-        },
-    };
+        this._amigos = [];
+        this._grupos = []; // _grupos CLASE
+        this._estadisticas = new EstadisticasEntrenamiento();
 
-    this.rutas = []; // RUTAS CLASE
-    this.retos = []; // RETOS CLASE
-    this.historicoRutas = new Map<string, string[]>();
+    this._rutas = []; // RUTAS CLASE
+    this._retos = []; // _retos CLASE
+    this._historicoRutas = new Map<string, string[]>();
     }
 
     // Getters
 
     /**
-     * Getter del nombre del usuario
-     * @returns el atributo que almacena el nombre del usuario
+     * Getter del _nombre del usuario
+     * @returns el atributo que almacena el _nombre del usuario
      */
-    getNombre(){
-        return this.nombre;
+    get nombre(){
+        return this._nombre;
     }
 
     /**
      * Getter del id del usuario
      * @returns el atributo que almacena el id del usuario
      */
-    getId(){
-        return this.id;
+    get Id(){
+        return this._id;
     }
     
     /**
      * Getter de las actividades que realiza el  suario
      * @returns el atributo que almacena las actividades del usuario
      */
-    getActividad(){
-        return this.actividad;
+    get Actividad(){
+        return this._actividad;
     }
     
     /**
-     * Getter de los amigos que tiene el usuario
-     * @returns el atributo que almacena los amigos del usuario
+     * Getter de los _amigos que tiene el usuario
+     * @returns el atributo que almacena los _amigos del usuario
      */
-    getAmigos(){
-        return this.amigos;
+    get amigos(){
+        return this._amigos;
     }
 
     /**
-     * Getter de los grupos a los que pertenece lel usuario 
-     * @returns el atributo que almacena los grupos del usuario
+     * Getter de los _grupos a los que pertenece lel usuario 
+     * @returns el atributo que almacena los _grupos del usuario
      */
-    getGrupos(){
-        return this.grupos;
+    get grupos(){
+        return this._grupos;
     }
     /**
      * Getter de las estadísticas del usuario
      * @returns el atributo que almacena las estadísticas del usuario
      */
-    getEstadisticas(){
-        return this.estadisticas;
+    get estadisticas(){
+        return this._estadisticas;
     }
 
     /**
      * Getter de las rutas del usuario
      * @returns el atributo que almacena las rutas del usuario
      */
-    getRutas(){
-        return this.rutas;
+    get Rutas(){
+        return this._rutas;
     }
 
     /**
-     * Getter de los retos del usuario
-     * @returns el atributo que almacena los retos que está realizando el  usuario
+     * Getter de los _retos del usuario
+     * @returns el atributo que almacena los _retos que está realizando el  usuario
      */
-    getRetos(){
-        return this.retos;
+    get retos(){
+        return this._retos;
     }
 
     /**
      * Getter del histórico del usuario
      * @returns el atributo que almacena las el histórico de rutas que ha realizado el usuario
      */
-    getHistorico(){
-        return this.historicoRutas;
+    get Historico(){
+        return this._historicoRutas;
     }
     
     // metodos para agregar elmiminar actividades.
@@ -170,7 +121,7 @@ export class Usuario{
      * @param actividad actividad a añadir a la lista
      */
     agregarActividad(actividad:Actividad){
-        this.actividad.push(actividad);
+        this._actividad.push(actividad);
     }
 
     /**
@@ -179,124 +130,148 @@ export class Usuario{
      */
     eliminarActividad(index:number){
         let sol:Actividad[] = [];
-        for(let i = 0; i < this.actividad.length; i++){
+        for(let i = 0; i < this._actividad.length; i++){
             if(i != index){
-                sol.push(this.actividad[i]);
+                sol.push(this._actividad[i]);
             }
         }
-        this.actividad = sol;
+        this._actividad = sol;
     }
 
-    // metodos para agregar eliminar grupos
+    // metodos para agregar eliminar _grupos
+
+    /**
+     * Método para añadir un grupo a la lista, comprobando si ya está metido
+     * @param id id del grupo a añadir
+     */
     agregarGrupo(id:string){
-        this.grupos.push(id);
+        if(!this._grupos.includes(id)){
+            this._grupos.push(id);
+        }
     }
 
+    /**
+     * Método para eliminar grupo
+     * @param id id del grupo que se quiere eliminar
+     */
     eliminarGrupo(id:string){
-        let sol:string[] = [];
-        for(let i = 0; i < this.grupos.length; i++){
-            if(this.grupos[i] != id){
-                sol.push(this.grupos[i]);
-            }
-        }
-        this.grupos = sol;
+        this._grupos = this._grupos.filter((grupo) => grupo != id);
     }
 
     // metodos para agregar eliminar rutas
+
+    /**
+     * Agrega una ruta a la lista de rutas
+     * @param id id de la ruta a añadir
+     */
     agregarRutas(id:string){
-        this.rutas.push(id);
+        if(!this._rutas.includes(id)){
+            this._rutas.push(id);
+        }
     }
 
+    /**
+     * Método pra eliminar la ruta pasada
+     * @param id id de la ruta a eliminar
+     */
     eliminarRutas(id:string){
-        let sol:string[] = [];
-        for(let i = 0; i < this.rutas.length; i++){
-            if(this.rutas[i] != id){
-                sol.push(this.rutas[i]);
-            }
+        this._rutas = this._rutas.filter((ruta) => ruta != id);
+        
+    }
+
+    // metodos para agregar eliminar _retos
+
+    /**
+     * Método para agregar retos
+     * @param id id del reto a agregar
+     */
+    agregar_retos(id:string){
+        if(!this._retos.includes(id)){
+            this._retos.push(id);
         }
-        this.rutas = sol;
     }
 
-    // metodos para agregar eliminar retos
-    agregarRetos(id:string){
-        this.retos.push(id);
+    /**
+     * Método para elminiar reto
+     * @param id id del reto a eliminar
+     */
+    eliminar_retos(id:string){
+        this._retos = this._retos.filter((reto) => reto != id);
     }
 
-    eliminarRetos(id:string){
-        let sol:string[] = [];
-        for(let i = 0; i < this.retos.length; i++){
-            if(this.retos[i] != id){
-                sol.push(this.retos[i]);
-            }
-        }
-        this.retos = sol;
-    }
+    // metodos para agregar eliminar _amigos
 
-    // metodos para agregar eliminar Amigos
+    /**
+     * Método para agregar amigos
+     * @param id id del amigo a agregar
+     */
     agregarAmigo(id:string){
-        this.amigos.push(id);
+        if(!this._amigos.includes(id)){
+            this._amigos.push(id);
+        }
     }
 
+    /**
+     * Método para eliminar amigos
+     * @param id id del amigo a eliminar
+     */
     eliminarAmigo(id:string){
-        let sol:string[] = [];
-        for(let i = 0; i < this.amigos.length; i++){
-            if(this.amigos[i] != id){
-                sol.push(this.amigos[i]);
-            }
-        }
-        this.amigos = sol;
+        this._amigos = this._amigos.filter((amigo) => amigo != id);
     }
 
     // metodos para agregar en el histórico de rutas.
+
+    /**
+     * Método para añadir ruta al historico
+     * @param fecha fecha en la que se realizó la ruta
+     * @param ruta ruta realizada
+     */
     agregarHistorico(fecha:string, ruta:string){
         let fechaExiste = false;
-        this.historicoRutas.forEach((array, elemento) =>{
+        this._historicoRutas.forEach((array, elemento) =>{
             if(elemento == fecha){
                 array.push(ruta);
                 fechaExiste = true
             }
         });
         if(!fechaExiste){
-            this.historicoRutas.set(fecha, [ruta]);
+            this._historicoRutas.set(fecha, [ruta]);
         }
     }
  
-    // Método de utilidad
-    private getWeekNumber(date: Date): number {
-        const onejan = new Date(date.getFullYear(), 0, 1);
-        return Math.ceil(((date.getTime() - onejan.getTime()) / 86400000 + onejan.getDay() + 1) / 7);
-    }
 
     // Métodos para actualizar estadísticas de entrenamiento
-  actualizarEstadisticas(km: number, desnivel: number): void {
-    const hoy = new Date();
-    const semana = this.getWeekNumber(hoy);
-    const mes = hoy.getMonth() + 1;
-    const año = hoy.getFullYear();
 
-    this.estadisticas.semana.distancia += km;
-    this.estadisticas.mes.distancia += km;
-    this.estadisticas.ano.distancia += km;
-    this.estadisticas.semana.elevacion += desnivel;
-    this.estadisticas.mes.elevacion += desnivel;
-    this.estadisticas.ano.elevacion += desnivel;
-
-    // Si se cambió de semana, se reinicia el contador de km y desnivel de la semana
-    if (semana !== this.getWeekNumber(new Date(hoy.getTime() - 7 * 24 * 60 * 60 * 1000))) {
-      this.estadisticas.semana.distancia = 0;
-      this.estadisticas.semana.elevacion = 0;
+    /**
+     * Actualizador de estadisticas pasandole los km y el desnivel realizado
+     * @param km km realizados
+     * @param desnivel desnivel realizado
+     */
+    actualizar_estadisticas(km: number, desnivel: number): void {
+        this._estadisticas.actualizarEstadisticas(km, desnivel);
     }
-    // Si se cambió de mes, se reinicia el contador de km y desnivel del mes
-    if (mes !== new Date(hoy.getTime() - 24 * 60 * 60 * 1000).getMonth() + 1) {
-        this.estadisticas.mes.distancia = 0;
-        this.estadisticas.mes.elevacion = 0;
-      }
-      // Si se cambió de año, se reinicia el contador de km y desnivel del año
-      if (año !== new Date(hoy.getTime() - 24 * 60 * 60 * 1000).getFullYear()) {
-        this.estadisticas.ano.distancia = 0;
-        this.estadisticas.ano.elevacion = 0;
-      }
 
+    // Getters de las estadísticas
+
+    /**
+     * getter de las estadisticas de la semana
+     */
+    get EstadisticasSemana(){
+        return this._estadisticas.obtenerEstadisticasSemana();
+    }
+
+    /**
+     * getter de las estadisticas del mes
+     */
+    get EstadisticasMes(){
+        return this._estadisticas.obtenerEstadisticasMes();
+    }
+
+    /**
+     * getter de las estadisticas del año
+     */
+    get EstadisticasAno(){
+        return this._estadisticas.obtenerEstadisticasAnio();
     }
     
 }
