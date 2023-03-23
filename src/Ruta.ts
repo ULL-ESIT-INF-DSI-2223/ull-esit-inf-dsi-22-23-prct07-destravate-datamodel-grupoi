@@ -23,7 +23,7 @@ export class Ruta{
     private _final: Geolocalizacion;
     private _longitud: number;
     private _desnivel: number;
-    private _usuarios: number[];
+    private _usuarios: string[];
     private _actividad: Actividad;
     private _calificacion: number;
 
@@ -38,7 +38,7 @@ export class Ruta{
      * @param actividad Tipo de actividad: Indicador si la ruta se puede realizar en bicicleta o corriendo
      * @param calificacion Calificación media de la ruta
      */
-    constructor(nombre: string, inicio: Geolocalizacion, final: Geolocalizacion, longitud: number, desnivel: number, usuarios: number[], actividad: Actividad, calificacion: number) {
+    constructor(nombre: string, inicio: Geolocalizacion, final: Geolocalizacion, longitud: number, desnivel: number, usuarios: string[], actividad: Actividad, calificacion: number) {
         // Se genera el id único
         let generadorId = GeneradorIdUnicos.getInstance();
         this._id = generadorId.generateUniqueId();
@@ -141,14 +141,14 @@ export class Ruta{
      * Getter del atributo privado _usuarios
      * @return this._usuarios
      */
-    get usuarios(): number[] {
+    get usuarios(): string[] {
         return this._usuarios;
     }
     /**
      * Setter del atributo privado _usuarios
      * @param value Nuevo valor para el atributo _usuarios
      */
-    set usuarios(value: number[]) {
+    set usuarios(value: string[]) {
         this._usuarios = value;
     }
     /****************************************************************************/

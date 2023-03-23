@@ -29,6 +29,8 @@ export class Grupo {
     this._nombre = nombre;
     this._miembrosID = miembrosID;
 
+    this._estadisticas = new EstadisticasEntrenamiento();
+
     this._ranking = [];
     this._rutasFav = [];
     this._historicoRutas = new Map<string, string[]>();
@@ -246,5 +248,15 @@ export class Grupo {
   public eliminarRutasFav(id: string) {
     this._rutasFav = this._rutasFav.filter(rutas => rutas !== id);
   }
+
+  
+   /**
+     * Actualizador de estadisticas pasandole los km y el desnivel realizado
+     * @param km km realizados
+     * @param desnivel desnivel realizado
+     */
+   actualizar_estadisticas(km: number, desnivel: number): void {
+    this._estadisticas.actualizarEstadisticas(km, desnivel);
+}
 }
 
