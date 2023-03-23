@@ -1,12 +1,31 @@
 import { GeneradorIdUnicos } from "./GeneradorIdUnicos";
 import {Actividad} from "./Actividad";
 
+
 export class Usuario{
+    /**
+     * Atributo para almacenar el id único
+     */
     private id:string;
+    /**
+     * Atributo para almacenar el nombre del usuario
+     */
     private nombre:string;
+    /**
+     * Atributo para almacenar array de actividades que realiza el usuario bicicleta ó correr
+     */
     private actividad:Actividad[];
+    /**
+     * Atributo para almacenar un array de ids de los amigos del usuario
+     */
     private amigos: string[];
+    /**
+     * Atributo para almacenar un array con los grupos de amigos que tiene el usuario
+     */
     private grupos: string[]; // GRUPOS CLASE
+    /**
+     * Atributo para almacenar las estadísticas de desnivel y cantidad de km recorridos en la semana mes y año
+     */
     private estadisticas : {
         semana: {
             distancia: number;
@@ -22,10 +41,23 @@ export class Usuario{
         };
     };
 
+    /**
+     * Atributo para almacenar un array con los ids de las rutas favoritas del usuario
+     */
     private rutas:string[]; // RUTAS CLASE
+    /**
+     * Atributo para almacenar un string con los ids de los retos que el usuario está realizando actualmente
+     */
     private retos:string[]; // RETOS CLASE
+    /**
+     * Atributo que almacena el historico de las rutas realizadas, almacenado la fecha y un array con los ids de las rutas realizadas en esa fecha
+     */
     private historicoRutas: Map<string, string[]>;
 
+    /**
+     * El constructor inicializa el id único del usuario , el nombre pasado y el resto de atributos como vacíos 
+     * @param name nombre del usuario que se quiere crear
+     */
     constructor(name:string){
         this.nombre = name;
         // Se genera el id único
@@ -57,48 +89,94 @@ export class Usuario{
     this.retos = []; // RETOS CLASE
     this.historicoRutas = new Map<string, string[]>();
     }
+
     // Getters
 
+    /**
+     * Getter del nombre del usuario
+     * @returns el atributo que almacena el nombre del usuario
+     */
     getNombre(){
         return this.nombre;
     }
 
+    /**
+     * Getter del id del usuario
+     * @returns el atributo que almacena el id del usuario
+     */
     getId(){
         return this.id;
     }
     
+    /**
+     * Getter de las actividades que realiza el  suario
+     * @returns el atributo que almacena las actividades del usuario
+     */
     getActividad(){
         return this.actividad;
     }
     
+    /**
+     * Getter de los amigos que tiene el usuario
+     * @returns el atributo que almacena los amigos del usuario
+     */
     getAmigos(){
         return this.amigos;
     }
 
+    /**
+     * Getter de los grupos a los que pertenece lel usuario 
+     * @returns el atributo que almacena los grupos del usuario
+     */
     getGrupos(){
         return this.grupos;
     }
-
+    /**
+     * Getter de las estadísticas del usuario
+     * @returns el atributo que almacena las estadísticas del usuario
+     */
     getEstadisticas(){
         return this.estadisticas;
     }
+
+    /**
+     * Getter de las rutas del usuario
+     * @returns el atributo que almacena las rutas del usuario
+     */
     getRutas(){
         return this.rutas;
     }
 
+    /**
+     * Getter de los retos del usuario
+     * @returns el atributo que almacena los retos que está realizando el  usuario
+     */
     getRetos(){
         return this.retos;
     }
 
+    /**
+     * Getter del histórico del usuario
+     * @returns el atributo que almacena las el histórico de rutas que ha realizado el usuario
+     */
     getHistorico(){
         return this.historicoRutas;
     }
     
     // metodos para agregar elmiminar actividades.
+
+    /**
+     * Método para añadir una actividad a la lista 
+     * @param actividad actividad a añadir a la lista
+     */
     agregarActividad(actividad:Actividad){
         this.actividad.push(actividad);
     }
 
+    /**
+     * Método para eliminar actividades
+     * @param index indice de la actividad que se quiere eliminar.
+     */
     eliminarActividad(index:number){
         let sol:Actividad[] = [];
         for(let i = 0; i < this.actividad.length; i++){
