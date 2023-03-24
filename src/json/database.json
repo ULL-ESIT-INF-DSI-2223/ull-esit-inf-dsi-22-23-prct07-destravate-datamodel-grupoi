@@ -1,0 +1,164 @@
+{
+    "rutas": [
+        {
+            "nombre": "Ruta 1",
+            "inicio": {
+                "latitud": 40.4168,
+                "longitud": -3.7038
+            },
+            "final": {
+                "latitud": 40.4799,
+                "longitud": -3.7038
+            },
+            "longitud": 10,
+            "desnivel": 500,
+            "usuario": ["1","2","3"],
+            "actividad": "Correr",
+            "calificacion": 6.7
+        },
+        {
+            "nombre": "Ruta 2",
+            "inicio": {
+                "latitud": 41.3851,
+                "longitud": 2.1734
+            },
+            "final": {
+                "latitud": 41.3984,
+                "longitud": 2.1741
+            },
+            "longitud": 15,
+            "desnivel": 200,
+            "usuario": ["1","2","3"],
+            "actividad": "Bicicleta",
+            "calificacion": 4.5
+        },
+        {
+            "nombre": "Ruta 3",
+            "inicio": {
+                "latitud": 40.4168,
+                "longitud": -3.7038
+            },
+            "final": {
+                "latitud": 40.4799,
+                "longitud": -3.7038
+            },
+            "longitud": 8,
+            "desnivel": 300,
+            "usuario": ["1","2","3"],
+            "actividad": "Correr",
+            "calificacion": 4.2
+        },
+        {
+            "nombre": "Ruta 4",
+            "inicio": {
+                "latitud": 41.3851,
+                "longitud": 2.1734
+            },
+            "final": {
+                "latitud": 41.3984,
+                "longitud": 2.1741
+            },
+            "longitud": 12,
+            "desnivel": 400,
+            "usuario": ["1","2","3"],
+            "actividad": "Bicicleta",
+            "calificacion": 8.9
+        },
+        {
+            "nombre": "Ruta 5",
+            "inicio": {
+                "latitud": 40.4168,
+                "longitud": -3.7038
+            },
+            "final": {
+                "latitud": 40.4799,
+                "longitud": -3.7038
+            },
+            "longitud": 20,
+            "desnivel": 700,
+            "usuario": ["1","2","3"],
+            "actividad": "Correr",
+            "calificacion": 5.4
+        },
+        {
+            "nombre": "Ruta 6",
+            "inicio": {
+                "latitud": 41.3851,
+                "longitud": 2.1734
+            },
+            "final": {
+                "latitud": 41.3984,
+                "longitud": 2.1741
+            },
+            "longitud": 25,
+            "desnivel": 800,
+            "usuario": ["1","2","3"],
+            "actividad": "Bicicleta",
+            "calificacion": 9.5
+        },
+        {
+            "nombre": "Ruta 7",
+            "inicio": {
+                "latitud": 40.4168,
+                "longitud": -3.7038
+            },
+            "final": {
+                "latitud": 40.4799,
+                "longitud": -3.7038
+            },
+            "longitud": 18,
+            "desnivel": 600,
+            "usuario": ["1","2","3"],
+            "actividad": "Correr",
+            "calificacion": 9.8
+        },
+        {
+            "nombre": "Ruta 8",
+            "inicio": {
+                "latitud": 41.3851,
+                "longitud": 2.1734
+            },
+            "final": {
+                "latitud": 41.3984,
+                "longitud": 2.1741
+            },
+            "longitud": 22,
+            "desnivel": 900,
+            "usuario": ["1","2","3"],
+            "actividad": "Bicicleta",
+            "calificacion": 6.5
+        },
+        {
+            "nombre": "Ruta 9",
+            "inicio": {
+                "latitud": 40.4168,
+                "longitud": -3.7038
+            },
+            "final": {
+                "latitud": 40.4799,
+                "longitud": -3.7038
+            },
+            "longitud": 30,
+            "desnivel": 1000,
+            "usuario": ["1","2","3"],
+            "actividad": "Correr",
+            "calificacion": 7.3
+        },
+        {
+            "nombre": "Ruta 10",
+            "inicio": {
+                "latitud": 41.3851,
+                "longitud": 2.1734
+            },
+            "final": {
+                "latitud": 41.3984,
+                "longitud": 2.1741
+            },
+            "longitud": 35,
+            "desnivel": 1100,
+            "usuario": ["1","2","3"],
+            "actividad": "Bicicleta",
+            "calificacion": 3.0
+        }
+    ]
+}
