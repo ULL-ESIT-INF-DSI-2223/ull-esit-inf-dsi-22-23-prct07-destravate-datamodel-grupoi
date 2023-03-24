@@ -130,9 +130,9 @@ async function promptAdd(): Promise<void> {
 
     const inicio_var: Geolocalizacion = { latitud: inicio_latitud, longitud: inicio_longitud };
     const final_var: Geolocalizacion = { latitud: final_latitud, longitud: final_longitud };
-        
-    let new_ruta = new Ruta(nombre, inicio_var, final_var, longitud, desnivel, ["1"], actividad, calificacion)
-    todos.push(new_ruta);
+    colectionMain.addRuta(nombre, inicio_var, final_var, longitud, desnivel, ["1"], actividad, calificacion)
+    //let new_ruta = new Ruta(nombre, inicio_var, final_var, longitud, desnivel, ["1"], actividad, calificacion)
+    //todos.push(new_ruta);
     promptRuta();
 }
 // Remove ruta
@@ -328,6 +328,8 @@ async function promptRuta(): Promise<void>{
 function promptApp(): void{
     console.clear();
     console.log(JSON.stringify(database.get('rutas').find({nombre: "Ruta 1"}).value()));
+    console.log(JSON.stringify(database.get('rutas').find({nombre: "Ruta 2"}).value()));
+
     inquirer.prompt({
         type: "list",
         name: "command",
