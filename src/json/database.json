@@ -3,8 +3,8 @@
     {
       "nombre": "Ruta 1",
       "inicio": {
-        "latitud": 40.34,
-        "longitud": -3.7
+        "latitud": 40.45,
+        "longitud": -4
       },
       "final": {
         "latitud": 39.879,

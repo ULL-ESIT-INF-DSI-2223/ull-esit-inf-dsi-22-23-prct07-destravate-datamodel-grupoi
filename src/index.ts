@@ -6,11 +6,13 @@ import { Actividad } from "./Actividad";
 import FileSync from 'lowdb/adapters/FileSync';
 import { jsonTodoCollection } from './jsonTodoCollection';
 
-// Rutas
+/*-----------------------------------DATABASE----------------------------------- */
 
 const low = require('lowdb');
 const database = low(new FileSync('./src/json/database.json'));
 const colectionMain = new jsonTodoCollection();
+
+/*-----------------------------------COMANDOS----------------------------------- */
 enum Options{
     Rutas = "Rutas",
     Usuarios = "Usuarios",
@@ -37,7 +39,37 @@ enum Ruta_enum{
     Actividad = "Actividad",
     Calificacion = "Calificacion"
 }
-// Add ruta
+
+/*-----------------------------------RUTAS----------------------------------- */
+async function promptRuta(): Promise<void>{
+    console.clear();
+    inquirer.prompt({
+        type: "list",
+        name: "command",
+        message: "Choose option",
+        choices: Object.values(Commands)
+    }).then(async answers => {
+        switch (answers["command"]) {
+            case Commands.Quit:
+                promptApp();
+                break;
+            case Commands.Añadir_ruta:
+                promptAdd();
+                break;
+            case Commands.Borrar_ruta:
+                promptRemove();
+                break;
+            case Commands.Enseñar_rutas:
+                displayRutaList();
+                break;
+            case Commands.Modificar_ruta:
+                modifyRuta();
+                break;
+        }
+    })
+}
+
+/*-----------------AÑADIR RUTA-----------------*/
 async function promptAdd(): Promise<void> {
     console.clear();
     let nombre = ""
@@ -133,7 +165,8 @@ async function promptAdd(): Promise<void> {
     database.get('rutas').push(new_ruta).write();
     promptRuta();
 }
-// Remove ruta
+
+/*-----------------ELIMINAR RUTA-----------------*/
 async function promptRemove(): Promise<void>{
     console.clear()
     const respuesta = await inquirer.prompt({
@@ -144,7 +177,8 @@ async function promptRemove(): Promise<void>{
     database.get('rutas').remove({nombre: respuesta.ruta}).write();
     promptRuta();
 }
-// Show ruta
+
+/*-----------------ENSEÑAR RUTAS-----------------*/
 async function displayRutaList(): Promise<void>{
     console.clear();
     console.log(`Rutas: `);
@@ -158,25 +192,13 @@ async function displayRutaList(): Promise<void>{
     });
     promptRuta();
 }
-// Modificar ruta
-// Selecciona ruta y la devuelve
-async function selectRuta(): Promise<string>{
-    console.clear()
-    const respuesta = await inquirer.prompt({
-        type: 'input',
-        name: 'ruta',
-        message: 'Seleccione la ruta que deseas modificar:',
-    });
 
-    return respuesta.ruta;
-}
+/*-----------------MODIFICAR RUTA-----------------*/
+
 // Cambia parámetro
 async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
     console.clear();
-    //let index = todos.indexOf(ruta)  
-    console.log(ruta)
-    console.log(JSON.stringify(database.get('rutas').find({nombre: ruta}).value()));
-    console.log(database.get('rutas').find({"nombre": ruta}).value())
+
     if (enumerado === Ruta_enum.Nombre){
         const respuesta = await inquirer.prompt({
             type: "input",
@@ -185,7 +207,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         })
         database.get('rutas').find({nombre: ruta}).set("nombre", respuesta.nombre).write()
         colectionMain.loadRuta()
-        //todos[index].nombre = respuesta.nombre;
     }
     else if (enumerado === Ruta_enum.Inicio){
         const respuesta = await inquirer.prompt([{
@@ -201,7 +222,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         const geo: Geolocalizacion = { latitud: Number(respuesta.latitud), longitud: Number(respuesta.longitud) };
         database.get('rutas').find({nombre: ruta}).set("inicio", geo).write()
         colectionMain.loadRuta()
-        //todos[index].inicio = geo;
     }
     else if (enumerado === Ruta_enum.Final){
         const respuesta = await inquirer.prompt([{
@@ -217,7 +237,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         const geo: Geolocalizacion = { latitud: Number(respuesta.latitud), longitud: Number(respuesta.longitud) };
         database.get('rutas').find({nombre: ruta}).set("final", geo).write()
         colectionMain.loadRuta()
-        //todos[index].final = geo;
     }
     else if (enumerado === Ruta_enum.Longitud){
         const respuesta = await inquirer.prompt({
@@ -227,7 +246,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         })
         database.get('rutas').find({nombre: ruta}).set("longitud", parseInt(respuesta.longitud)).write()
         colectionMain.loadRuta()
-        //todos[index].longitud = respuesta.longitud;
     }
     else if (enumerado === Ruta_enum.Desnivel){
         const respuesta = await inquirer.prompt({
@@ -237,7 +255,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         })
         database.get('rutas').find({nombre: ruta}).set("desnivel", parseInt(respuesta.desnivel)).write()
         colectionMain.loadRuta()
-        //todos[index].desnivel = respuesta.desnivel;
     }
     else if (enumerado === Ruta_enum.Calificacion){
         const respuesta = await inquirer.prompt({
@@ -247,7 +264,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         })
         database.get('rutas').find({nombre: ruta}).set("calificacion", parseInt(respuesta.calificacion)).write()
         colectionMain.loadRuta()
-        //todos[index].calificacion = respuesta.calificacion;
     }
     else if (enumerado === Ruta_enum.Actividad){
         const respuesta = await inquirer.prompt({
@@ -259,19 +275,23 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         if(respuesta.actividad === "Bicicleta"){
             database.get('rutas').find({nombre: ruta}).set("actividad", "Bicicleta").write()
             colectionMain.loadRuta()
-            //todos[index].actividad = Actividad.Bicicleta;
         }else{
             database.get('rutas').find({nombre: ruta}).set("actividad", "Correr").write()
             colectionMain.loadRuta()
-            //todos[index].actividad = Actividad.Correr;
         }
     }
     promptRuta();
 
 }
 // Enseña todos los parámetros y escoge que quiere modificar
-async function modifyRuta(ruta: string): Promise<void>{
+async function modifyRuta(): Promise<void>{
     console.clear();
+    const respuesta_ruta = await inquirer.prompt({
+        type: 'input',
+        name: 'ruta',
+        message: 'Escribe el nombre de la ruta que deseas modificar: '
+    })
+    const ruta = respuesta_ruta.ruta
     inquirer.prompt({
         type: "list",
         name: "command",
@@ -303,35 +323,9 @@ async function modifyRuta(ruta: string): Promise<void>{
         }
     })
 }
-// Ruta
-async function promptRuta(): Promise<void>{
-    console.clear();
-    inquirer.prompt({
-        type: "list",
-        name: "command",
-        message: "Choose option",
-        choices: Object.values(Commands)
-    }).then(async answers => {
-        switch (answers["command"]) {
-            case Commands.Quit:
-                promptApp();
-                break;
-            case Commands.Añadir_ruta:
-                promptAdd();
-                break;
-            case Commands.Borrar_ruta:
-                promptRemove();
-                break;
-            case Commands.Enseñar_rutas:
-                displayRutaList();
-                break;
-            case Commands.Modificar_ruta:
-                let ruta = selectRuta();
-                modifyRuta(await ruta);
-                break;
-        }
-    })
-}
+
+
+/*-----------------------------------APP----------------------------------- */
 // App
 function promptApp(): void{
     console.clear();
