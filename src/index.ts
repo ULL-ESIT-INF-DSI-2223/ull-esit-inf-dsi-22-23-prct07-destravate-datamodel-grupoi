@@ -24,7 +24,7 @@ enum Commands {
     Borrar_ruta = "Borrar ruta",
     Modificar_ruta = "Modificar ruta",
     Enseñar_rutas = "Enseñar rutas",
-    Quit = "Quit"
+    Atras = "Atras"
 }
 enum Actividades{
     Correr = "Correr",
@@ -39,6 +39,18 @@ enum Ruta_enum{
     Actividad = "Actividad",
     Calificacion = "Calificacion"
 }
+enum Ruta_Ordenar{
+    Nombre = "Nombre",
+    Usuarios = "Número de usuarios",
+    Longitud = "Longitud",
+    Calificacion = "Calificacion",
+    Actividad = "Actividad",
+    Atras = "Atras"
+}
+enum Ascendente_Descendente{
+    Ascendente = "Ascendente",
+    Descendente = "Descendente"
+}
 
 /*-----------------------------------RUTAS----------------------------------- */
 async function promptRuta(): Promise<void>{
@@ -50,7 +62,7 @@ async function promptRuta(): Promise<void>{
         choices: Object.values(Commands)
     }).then(async answers => {
         switch (answers["command"]) {
-            case Commands.Quit:
+            case Commands.Atras:
                 promptApp();
                 break;
             case Commands.Añadir_ruta:
@@ -60,7 +72,7 @@ async function promptRuta(): Promise<void>{
                 promptRemove();
                 break;
             case Commands.Enseñar_rutas:
-                displayRutaList();
+                promptOrdenarRutas();
                 break;
             case Commands.Modificar_ruta:
                 modifyRuta();
@@ -172,25 +184,89 @@ async function promptRemove(): Promise<void>{
     const respuesta = await inquirer.prompt({
         type: 'input',
         name: 'ruta',
-        message: 'Seleccione la ruta que deseas eliminar:',
+        message: 'Escribe el nombre de la ruta que deseas eliminar: ',
     });
     database.get('rutas').remove({nombre: respuesta.ruta}).write();
     promptRuta();
 }
 
 /*-----------------ENSEÑAR RUTAS-----------------*/
-async function displayRutaList(): Promise<void>{
+// Enseñar opciones de enseñar rutas
+// Especificar ascendente o descendente
+// 
+async function promptOrdenarRutas(): Promise<void>{
     console.clear();
-    console.log(`Rutas: `);
-
-    console.log(JSON.stringify(database.get('rutas').sortBy('calificacion').reverse().value(), null, '\t'));
+    await inquirer.prompt({
+        type: "list",
+        name: "command",
+        message: "Ordenar por: ",
+        choices: Object.values(Ruta_Ordenar)
+    }).then(async answers => {
+        if (answers["command"] === Ruta_Ordenar.Atras){
+            promptRuta();            
+        }else if (answers["command"] === Ruta_Ordenar.Nombre){
+            promptRutaOrdenada(Ruta_Ordenar.Nombre);
+        }else if (answers["command"] === Ruta_Ordenar.Longitud){
+            promptRutaOrdenada(Ruta_Ordenar.Longitud);
+        }else if (answers["command"] === Ruta_Ordenar.Actividad){
+            promptRutaOrdenada(Ruta_Ordenar.Actividad);
+        }else if (answers["command"] === Ruta_Ordenar.Calificacion){
+            promptRutaOrdenada(Ruta_Ordenar.Calificacion);
+        }else if (answers["command"] === Ruta_Ordenar.Usuarios){
+            promptRutaOrdenada(Ruta_Ordenar.Usuarios);
+        }
+    })
+    //promptRuta()
+}
+async function promptRutaOrdenada(tipo: Ruta_Ordenar): Promise<void>{
+    console.clear();
+    await inquirer.prompt({
+        type: "list",
+        name: "command",
+        message: "Choose option",
+        choices: Object.values(Ascendente_Descendente)
+    }).then(async answers => {
+        if (answers["command"] === Ascendente_Descendente.Ascendente){
+            if (tipo === Ruta_Ordenar.Nombre){
+                console.log(JSON.stringify(database.get('rutas').sortBy('nombre').value(), null, '\t'));
+            }else if (tipo === Ruta_Ordenar.Longitud){
+                console.log(JSON.stringify(database.get('rutas').sortBy('longitud').value(), null, '\t'));
+            }else if (tipo === Ruta_Ordenar.Actividad){
+                console.log(JSON.stringify(database.get('rutas').sortBy('actividad').value(), null, '\t'));
+            }else if (tipo === Ruta_Ordenar.Calificacion){
+                console.log(JSON.stringify(database.get('rutas').sortBy('calificacion').value(), null, '\t'));
+            }else if (tipo === Ruta_Ordenar.Usuarios){
+                console.log(JSON.stringify(database.get('rutas').sortBy((ruta: any) => ruta.usuario.length).value(), null, '\t'));
+            }else{
+                promptRuta();
+            }
+        } else{
+            if (tipo === Ruta_Ordenar.Nombre){
+                console.log(JSON.stringify(database.get('rutas').sortBy('nombre').reverse().value(), null, '\t'));
+            }else if (tipo === Ruta_Ordenar.Longitud){
+                console.log(JSON.stringify(database.get('rutas').sortBy('longitud').reverse().value(), null, '\t'));
+            }else if (tipo === Ruta_Ordenar.Actividad){
+                console.log(JSON.stringify(database.get('rutas').sortBy('actividad').reverse().value(), null, '\t'));
+            }else if (tipo === Ruta_Ordenar.Calificacion){
+                console.log(JSON.stringify(database.get('rutas').sortBy('calificacion').reverse().value(), null, '\t'));
+            }else if (tipo === Ruta_Ordenar.Usuarios){
+                console.log(JSON.stringify(database.get('rutas').sortBy((ruta: any) => ruta.usuario.length).reverse().value(), null, '\t'));
+            }else{
+                promptRuta();
+            }
+        }
+    })
+    console.log("\n")
     const respuesta = await inquirer.prompt({
         type: 'list',
         name: 'ruta',
         message: 'Presione el botón para salir:',
-        choices: ["Quit"]
+        choices: ["Salir"]
+    }).then(async answers => {
+        console.clear();
+        promptRuta();
     });
-    promptRuta();
+
 }
 
 /*-----------------MODIFICAR RUTA-----------------*/

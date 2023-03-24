@@ -10,7 +10,7 @@
         "latitud": 39.879,
         "longitud": -3.456
       },
-      "longitud": 9,
+      "longitud": 10,
       "desnivel": 600,
       "usuario": [
         "1",
@@ -35,7 +35,8 @@
       "usuario": [
         "1",
         "2",
-        "3"
+        "3",
+        "4"
       ],
       "actividad": "Bicicleta",
       "calificacion": 4.5
