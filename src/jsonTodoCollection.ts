@@ -37,4 +37,9 @@ export class jsonTodoCollection extends TodoCollection{
             })
         }
     }
+
+    // Probando cosas
+    addRuta(nombre: string, inicio: Geolocalizacion, final: Geolocalizacion, longitud: number, desnivel: number, usuarios: string[], actividad: Actividad, calificacion: number){
+        let result = super.addRuta(nombre, inicio, final, longitud, desnivel, usuarios, actividad, calificacion)
+    }
 }

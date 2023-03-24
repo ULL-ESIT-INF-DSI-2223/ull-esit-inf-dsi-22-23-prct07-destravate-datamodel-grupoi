@@ -7,25 +7,6 @@ import FileSync from 'lowdb/adapters/FileSync';
 import { jsonTodoCollection } from './jsonTodoCollection';
 
 // Rutas
-// Creamos algunas instancias de Geolocalizacion para usar en las rutas
-const inicio1: Geolocalizacion = { latitud: 40.4168, longitud: -3.7038 };
-const final1: Geolocalizacion = { latitud: 40.4799, longitud: -3.7038 };
-
-const inicio2: Geolocalizacion = { latitud: 41.3851, longitud: 2.1734 };
-const final2: Geolocalizacion = { latitud: 41.3984, longitud: 2.1741 };
-
-let todos: Ruta[] = [
-    new Ruta('Ruta 1', inicio1, final1, 10, 500, ["1", "2", "3"], Actividad.Correr, 6.7),
-    new Ruta('Ruta 2', inicio2, final2, 15, 200, ["1", "2", "3"], Actividad.Bicicleta, 4.5),
-    new Ruta('Ruta 3', inicio1, final2, 8, 300, ["1", "2", "3"], Actividad.Correr, 4.2),
-    new Ruta('Ruta 4', inicio2, final1, 12, 400, ["1", "2", "3"], Actividad.Bicicleta, 8.9),
-    new Ruta('Ruta 5', inicio1, final1, 20, 700, ["1", "2", "3"], Actividad.Correr, 5.4),
-    new Ruta('Ruta 6', inicio2, final2, 25, 800, ["1", "2", "3"], Actividad.Bicicleta, 9.5),
-    new Ruta('Ruta 7', inicio1, final2, 18, 600, ["1", "2", "3"], Actividad.Correr, 9.8),
-    new Ruta('Ruta 8', inicio2, final1, 22, 900, ["1", "2", "3"], Actividad.Bicicleta, 6.5),
-    new Ruta('Ruta 9', inicio1, final1, 30, 1000, ["1", "2", "3"], Actividad.Correr, 7.3),
-    new Ruta('Ruta 10', inicio2, final2, 35, 1100, ["1", "2", "3"], Actividad.Bicicleta, 3.0)
-];
 
 const low = require('lowdb');
 const database = low(new FileSync('./src/json/database.json'));
@@ -131,37 +112,44 @@ async function promptAdd(): Promise<void> {
     const inicio_var: Geolocalizacion = { latitud: inicio_latitud, longitud: inicio_longitud };
     const final_var: Geolocalizacion = { latitud: final_latitud, longitud: final_longitud };
 
-    //database.get('rutas').find({nombre: "Ruta 1"}).set("nombre", "La Laguna").write()
-    colectionMain.addRuta(nombre, inicio_var, final_var, longitud, desnivel, ["1"], actividad, calificacion)
-
-    colectionMain.loadRuta()
-    //let new_ruta = new Ruta(nombre, inicio_var, final_var, longitud, desnivel, ["1"], actividad, calificacion)
-    //todos.push(new_ruta);
+    const new_ruta = {
+        "nombre": nombre,
+        "inicio": {
+          "latitud": inicio_latitud,
+          "longitud": inicio_longitud
+        },
+        "final": {
+          "latitud": final_latitud,
+          "longitud": final_longitud
+        },
+        "longitud": longitud,
+        "desnivel": desnivel,
+        "usuario": [
+          "1"
+        ],
+        "actividad": actividad,
+        "calificacion": calificacion
+    }
+    database.get('rutas').push(new_ruta).write();
     promptRuta();
 }
 // Remove ruta
 async function promptRemove(): Promise<void>{
     console.clear()
     const respuesta = await inquirer.prompt({
-        type: 'list',
+        type: 'input',
         name: 'ruta',
         message: 'Seleccione la ruta que deseas eliminar:',
-        choices: todos.map((clase) => ({
-            name: `${clase.nombre}`,
-            value: clase,
-        }))
     });
-    const index = todos.indexOf(respuesta.ruta); // obtiene el índice del elemento a eliminar
-    if (index !== -1) {
-        todos.splice(index, 1); // elimina el elemento del array original
-    }
+    database.get('rutas').remove({nombre: respuesta.ruta}).write();
     promptRuta();
 }
 // Show ruta
 async function displayRutaList(): Promise<void>{
     console.clear();
     console.log(`Rutas: `);
-    todos.forEach(item => console.log(item.toString()));
+
+    console.log(JSON.stringify(database.get('rutas').sortBy('calificacion').reverse().value(), null, '\t'));
     const respuesta = await inquirer.prompt({
         type: 'list',
         name: 'ruta',
@@ -347,9 +335,6 @@ async function promptRuta(): Promise<void>{
 // App
 function promptApp(): void{
     console.clear();
-    console.log(JSON.stringify(database.get('rutas').find({nombre: "Ruta 1"}).value()));
-    console.log(JSON.stringify(database.get('rutas').find({nombre: "Ruta 2"}).value()));
-
     inquirer.prompt({
         type: "list",
         name: "command",
