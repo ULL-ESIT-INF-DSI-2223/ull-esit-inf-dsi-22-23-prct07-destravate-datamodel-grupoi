@@ -26,6 +26,13 @@ enum Commands {
     Enseñar_rutas = "Enseñar rutas",
     Atras = "Atras"
 }
+enum Commands_Grupo{
+    Añadir_grupo = "Añadir grupo",
+    Borrar_grupo = "Borrar grupo",
+    Modificar_grupo = "Modificar grupo",
+    Enseñar_grupos = "Enseñar grupos",
+    Atras = "Atras"
+}
 enum Commands_Reto{
     Añadir_reto = "Añadir reto",
     Borrar_reto = "Borrar reto",
@@ -51,12 +58,23 @@ enum Reto_enum{
     Rutas = "Rutas",
     Actividad = "Actividad"
 }
+enum Grupo_enum{
+    Nombre = "Nombre",
+    Miembros = "Miembros",
+    Total = "Total"
+}
 enum Ruta_Ordenar{
     Nombre = "Nombre",
     Usuarios = "Número de usuarios",
     Longitud = "Longitud",
     Calificacion = "Calificacion",
     Actividad = "Actividad",
+    Atras = "Atras"
+}
+enum Grupo_Ordenar{
+    Nombre = "Nombre",
+    Total = "Total",
+    Miembros = "Miembros",
     Atras = "Atras"
 }
 enum Reto_Ordenar{
@@ -648,6 +666,188 @@ async function modifyReto(): Promise<void>{
     })
 }
 
+/*-----------------------------------GRUPOS----------------------------------- */
+async function promptGrupo(): Promise<void>{
+    console.clear();
+    inquirer.prompt({
+        type: "list",
+        name: "command",
+        message: "Choose option",
+        choices: Object.values(Commands_Grupo)
+    }).then(async answers => {
+        switch (answers["command"]) {
+            case Commands_Grupo.Atras:
+                promptApp();
+                break;
+            case Commands_Grupo.Añadir_grupo:
+                promptAddGrupo();
+                break;
+            case Commands_Grupo.Borrar_grupo:
+                promptRemoveGrupo();
+                break;
+            case Commands_Grupo.Enseñar_grupos:
+                promptOrdenarGrupos();
+                break;
+            case Commands_Grupo.Modificar_grupo:
+                modifyGrupo();
+                break;
+        }
+    })
+}
+
+/*-----------------AÑADIR GRUPO-----------------*/
+async function promptAddGrupo(): Promise<void> {
+    console.clear();
+    let nombre = ""
+    const answers = await inquirer.prompt([
+    {
+        type: "input",
+        name: "name",
+        message: "Introduce el nombre del grupo: "
+    },
+    ]).then((answers) => {
+            nombre = answers.name;
+    })
+
+    // Aqui el total deberia tener otra forma ya que se deberia recorrer las rutas y calcularlo
+    const new_grupo = {
+        "nombre": nombre,
+        "miembrosID": [
+            "1"
+        ]
+    }
+    database.get('grupos').push(new_grupo).write();
+    promptGrupo();
+}
+
+/*-----------------ELIMINAR RETO-----------------*/
+async function promptRemoveGrupo(): Promise<void>{
+    console.clear()
+    const respuesta = await inquirer.prompt({
+        type: 'input',
+        name: 'grupo',
+        message: 'Escribe el nombre del grupo que deseas eliminar: ',
+    });
+    database.get('grupos').remove({nombre: respuesta.grupo}).write();
+    promptGrupo();
+}
+
+/*-----------------ENSEÑAR GRUPOS-----------------*/
+// Enseñar opciones de enseñar grupos
+// Especificar ascendente o descendente
+// 
+async function promptOrdenarGrupos(): Promise<void>{
+    console.clear();
+    await inquirer.prompt({
+        type: "list",
+        name: "command",
+        message: "Ordenar por: ",
+        choices: Object.values(Grupo_Ordenar)
+    }).then(async answers => {
+        if (answers["command"] === Grupo_Ordenar.Atras){
+            promptGrupo();            
+        }else if (answers["command"] === Grupo_Ordenar.Nombre){
+            promptGrupoOrdenado(Grupo_Ordenar.Nombre);
+        }else if (answers["command"] === Grupo_Ordenar.Miembros){
+            promptGrupoOrdenado(Grupo_Ordenar.Miembros);
+        }else if (answers["command"] === Grupo_Ordenar.Total){
+            promptGrupoOrdenado(Grupo_Ordenar.Total);
+        }
+    })
+}
+async function promptGrupoOrdenado(tipo: Grupo_Ordenar): Promise<void>{
+    console.clear();
+    await inquirer.prompt({
+        type: "list",
+        name: "command",
+        message: "Choose option",
+        choices: Object.values(Ascendente_Descendente)
+    }).then(async answers => {
+        if (answers["command"] === Ascendente_Descendente.Ascendente){
+            if (tipo === Grupo_Ordenar.Nombre){
+                console.log(JSON.stringify(database.get('grupos').sortBy('nombre').value(), null, '\t'));
+            }else if (tipo === Grupo_Ordenar.Miembros){
+                console.log("Funcion no implementada")
+                //console.log(JSON.stringify(database.get('grupos').sortBy((reto: any) => reto.usuario.length).value(), null, '\t'));
+            }else if (tipo === Grupo_Ordenar.Total){
+                console.log("Funcion no implementada")
+                //console.log(JSON.stringify(database.get('grupos').sortBy('total').value(), null, '\t'));
+            }else{
+                promptGrupo();
+            }
+        } else{
+            if (tipo === Grupo_Ordenar.Nombre){
+                console.log(JSON.stringify(database.get('grupos').sortBy('nombre').reverse().value(), null, '\t'));
+            }else if (tipo === Grupo_Ordenar.Miembros){
+                console.log("Funcion no implementada")
+                //console.log(JSON.stringify(database.get('grupos').sortBy((reto: any) => reto.usuario.length).reverse().value(), null, '\t'));
+            }else if (tipo === Grupo_Ordenar.Total){
+                console.log("Funcion no implementada")
+                //console.log(JSON.stringify(database.get('grupos').sortBy('total').reverse().value(), null, '\t'));
+            }else{
+                promptGrupo();
+            }
+        }
+    })
+    console.log("\n")
+    const respuesta = await inquirer.prompt({
+        type: 'list',
+        name: 'ruta',
+        message: 'Presione el botón para salir:',
+        choices: ["Salir"]
+    }).then(async answers => {
+        console.clear();
+        promptGrupo();
+    });
+
+}
+
+/*-----------------MODIFICAR RUTA-----------------*/
+
+// Cambia parámetro
+async function modifyParamGrupo(grupo: string, enumerado: Grupo_enum): Promise<void>{
+    console.clear();
+
+    if (enumerado === Grupo_enum.Nombre){
+        const respuesta = await inquirer.prompt({
+            type: "input",
+            name: "nombre",
+            message: "Introduzca nuevo nombre: "
+        })
+        database.get('grupos').find({nombre: grupo}).set("nombre", respuesta.nombre).write()
+        colectionMain.loadReto()
+    }
+    promptGrupo();
+
+}
+// Enseña todos los parámetros y escoge que quiere modificar
+async function modifyGrupo(): Promise<void>{
+    console.clear();
+    const respuesta_grupo = await inquirer.prompt({
+        type: 'input',
+        name: 'grupo',
+        message: 'Escribe el nombre del grupo que deseas modificar: '
+    })
+    const grupo = respuesta_grupo.grupo
+    inquirer.prompt({
+        type: "list",
+        name: "command",
+        message: "Choose option",
+        choices: Object.values(Grupo_enum)
+    }).then(answers => {
+        switch (answers["command"]) {
+            case Grupo_enum.Nombre:
+                modifyParamGrupo(grupo, Grupo_enum.Nombre);
+                break; 
+            case Grupo_enum.Miembros:
+                modifyParamGrupo(grupo, Grupo_enum.Miembros);
+                break;
+            case Grupo_enum.Total:
+                modifyParamGrupo(grupo, Grupo_enum.Total);
+                break;
+        }
+    })
+}
 
 /*-----------------------------------APP----------------------------------- */
 // App
@@ -666,7 +866,11 @@ function promptApp(): void{
             case Options.Retos:
                 promptReto();
                 break;
+            case Options.Grupos:
+                promptGrupo();
+                break;
         }
     })
 }
+
 promptApp();

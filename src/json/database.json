@@ -359,5 +359,37 @@
         "3"
       ]
     }
+  ],
+  "grupos": [
+    {
+      "nombre": "Grupo 1",
+      "miembrosID": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "nombre": "Grupo 2",
+      "miembrosID": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "nombre": "Grupo 3",
+      "miembrosID": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "nombre": "Grupo 5",
+      "miembrosID": [
+        "1"
+      ]
+    }
   ]
 }

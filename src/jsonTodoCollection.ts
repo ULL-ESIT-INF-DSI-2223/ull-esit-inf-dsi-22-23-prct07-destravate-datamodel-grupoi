@@ -4,9 +4,11 @@ import * as lowdb from "lowdb"
 import FileSync from "lowdb/adapters/FileSync"
 import { Actividad } from "./Actividad"
 import { Reto } from "./Reto"
+import { Grupo } from "./Grupo"
 
 type schemaType = {
     rutas: Ruta[],
+    grupos: Grupo[],
     retos: Reto[]
 }
 
@@ -19,6 +21,7 @@ export class jsonTodoCollection extends TodoCollection{
         this.database = low(new FileSync('./src/json/database.json'))
         this.loadRuta();
         this.loadReto();
+        this.loadGrupo();
     }
 
     loadRuta(){
@@ -53,6 +56,20 @@ export class jsonTodoCollection extends TodoCollection{
                     element.usuarios as string[]
                 )
                 this.itemMapReto.set(aux.nombre, aux);
+            })
+        }
+    }
+
+    loadGrupo(){
+        if (this.database.has('grupos').value()){
+            const dbItem = this.database.get('grupos').value();
+            let aux: Grupo;
+            dbItem.forEach((element: any, index:number) =>{
+                aux = new Grupo(
+                    element.nombre as string,
+                    element.miembrosID as string[]
+                )
+                this.itemMapGrupo.set(aux.nombre, aux);
             })
         }
     }
