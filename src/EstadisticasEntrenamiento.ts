@@ -72,7 +72,7 @@ export class EstadisticasEntrenamiento {
    */
   public actualizarEstadisticas(km: number, desnivel: number) {
     const hoy = new Date();
-
+    
     // Obtiene el número de semana, mes y año actual
     const semana = this.getWeekNumber(hoy);
     const mes = hoy.getMonth() + 1;
@@ -88,7 +88,7 @@ export class EstadisticasEntrenamiento {
     this.desnivelAcumuladoAnio += desnivel;
 
     // Si se cambió de semana, se reinicia el contador de km y desnivel de la semana
-    if (semana !== this.getWeekNumber(new Date(hoy.getTime() - 7 * 24 * 60 * 60 * 1000))) {
+    if (semana !== this.getWeekNumber(new Date(hoy.getTime() - 7 * 24 * 60 * 60 * 1000))+1) {
       this.kmAcumuladosSemana = 0;
       this.desnivelAcumuladoSemana = 0;
     }
