@@ -360,36 +360,102 @@
       ]
     }
   ],
+  "usuarios": [
+    {
+      "_id": "id-14",
+      "_nombre": "Diego",
+      "_actividad": [
+        1
+      ],
+      "_amigos": [
+        "id-01",
+        "id-02"
+      ],
+      "_grupos": [
+        "id-03"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 1",
+        "Ruta 3",
+        "Ruta 5"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-16",
+      "_nombre": "Dani",
+      "_actividad": [
+        1
+      ],
+      "_amigos": [
+        "id-14"
+      ],
+      "_grupos": [
+        "id-03"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 3"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-17",
+      "_nombre": "Kevin",
+      "_actividad": [
+        1
+      ],
+      "_amigos": [
+        "id-14",
+        "id-16"
+      ],
+      "_grupos": [
+        "id-03"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    }
+  ],
   "grupos": [
     {
-      "nombre": "Grupo 1",
-      "miembrosID": [
-        "1",
-        "2",
-        "3"
-      ]
-    },
+      "id": "id-03",
+      "nombre": "senderismoTenerife",
+      "miembros": [],
+      "rutasFav": []
+    }
+  ],
+  "ultimoidUnico": [
     {
-      "nombre": "Grupo 2",
-      "miembrosID": [
-        "1",
-        "2",
-        "3"
-      ]
-    },
-    {
-      "nombre": "Grupo 3",
-      "miembrosID": [
-        "1",
-        "2",
-        "3"
-      ]
-    },
-    {
-      "nombre": "Grupo 5",
-      "miembrosID": [
-        "1"
-      ]
+      "nombre": "id_unico",
+      "id": 19
     }
   ]
 }

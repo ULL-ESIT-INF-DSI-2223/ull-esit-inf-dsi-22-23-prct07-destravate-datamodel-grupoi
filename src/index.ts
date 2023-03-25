@@ -5,7 +5,8 @@ import { Geolocalizacion } from "./Ruta";
 import { Actividad } from "./Actividad";
 import FileSync from 'lowdb/adapters/FileSync';
 import { jsonTodoCollection } from './jsonTodoCollection';
-
+import { promptUsuario } from './UsuarioInquirer';
+import { GeneradorIdUnicos } from './GeneradorIdUnicos';
 /*-----------------------------------DATABASE----------------------------------- */
 
 const low = require('lowdb');
@@ -122,6 +123,14 @@ async function promptAdd(): Promise<void> {
     console.clear();
     let nombre = ""
     let inicio_latitud = 0, inicio_longitud = 0, final_latitud = 0, final_longitud = 0, longitud = 0, desnivel = 0, calificacion = 0, actividad = Actividad.Bicicleta
+    // Sacar el id de los usuarios para que escoja sus amigos 
+    let amigos:string[] = [];
+    let jsonUsuario = database;
+    
+    for(let i in jsonUsuario.toJSON().usuarios){
+        amigos.push(jsonUsuario.toJSON().usuarios[i]._id);
+    }
+
     const answers = await inquirer.prompt([
       {
         type: "input",
@@ -159,6 +168,12 @@ async function promptAdd(): Promise<void> {
         message: 'Introduce el desnivel de la ruta: ',
     },
     {
+        type: 'checkbox',
+        name: 'amigo',
+        message: 'Escoge que usuarios han relizado la ruta: ',
+        choices: Object.values(amigos)
+    },
+    {
         type: 'number',
         name: 'calificacion',
         message: 'Introduce la calificacion de la ruta: ',
@@ -177,6 +192,7 @@ async function promptAdd(): Promise<void> {
             final_longitud = answers.final_longitud;
             longitud = answers.longitud;
             desnivel = answers.desnivel;
+            amigos = answers.amigo;
             actividad = answers.actividad;
             calificacion = answers.calificacion;
             switch (answers["actividad"]) {
@@ -192,7 +208,8 @@ async function promptAdd(): Promise<void> {
     const inicio_var: Geolocalizacion = { latitud: inicio_latitud, longitud: inicio_longitud };
     const final_var: Geolocalizacion = { latitud: final_latitud, longitud: final_longitud };
 
-    const new_ruta = {
+    const new_ruta = new Ruta(nombre, inicio_var, final_var, longitud, desnivel, amigos, actividad, calificacion);
+    /* {
         "nombre": nombre,
         "inicio": {
           "latitud": inicio_latitud,
@@ -209,7 +226,10 @@ async function promptAdd(): Promise<void> {
         ],
         "actividad": actividad,
         "calificacion": calificacion
-    }
+    }*/
+    const numberString = new_ruta.id.replace(/^id-/, '');
+    const lastId = parseInt(numberString);
+    database.get('ultimoidUnico').find({nombre: "id_unico"}).set("id", lastId).write();
     database.get('rutas').push(new_ruta).write();
     promptRuta();
 }
@@ -316,7 +336,7 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             name: "nombre",
             message: "Introduzca nuevo nombre: "
         })
-        database.get('rutas').find({nombre: ruta}).set("nombre", respuesta.nombre).write()
+        database.get('rutas').find({nombre: ruta}).set("+", respuesta.nombre).write()
         colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Inicio){
@@ -851,8 +871,11 @@ async function modifyGrupo(): Promise<void>{
 
 /*-----------------------------------APP----------------------------------- */
 // App
-function promptApp(): void{
+export function promptApp(): void{
     console.clear();
+    let idUnico = database.toJSON().ultimoidUnico[0].id;
+    let generadorId = GeneradorIdUnicos.getInstance();
+    generadorId.modificarContador(idUnico + 1);
     inquirer.prompt({
         type: "list",
         name: "command",
@@ -868,6 +891,9 @@ function promptApp(): void{
                 break;
             case Options.Grupos:
                 promptGrupo();
+                break;
+            case Options.Usuarios:
+                promptUsuario();
                 break;
         }
     })

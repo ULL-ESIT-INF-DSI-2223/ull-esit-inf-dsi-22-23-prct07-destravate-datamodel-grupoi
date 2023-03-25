@@ -12,6 +12,10 @@ export class GeneradorIdUnicos {
     this.contadorIds = 0;
   }
 
+  modificarContador(ultimoId:number){
+    this.contadorIds = ultimoId;
+
+  }
   /**
    * Funcion que devuelve la unica instancia de la clase, necesaria para implementar el patron singelton
    * @returns retorna la instancia de la clase, si no existe, la crea y la instancia
