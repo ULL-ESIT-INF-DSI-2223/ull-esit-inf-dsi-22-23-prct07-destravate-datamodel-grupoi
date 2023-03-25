@@ -609,10 +609,10 @@ async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void
             choices: Object.values(Actividades)
         })
         if(respuesta.actividad === "Bicicleta"){
-            database.get('rutas').find({nombre: reto}).set("actividad", "Bicicleta").write()
+            database.get('retos').find({nombre: reto}).set("actividad", "Bicicleta").write()
             colectionMain.loadReto()
         }else{
-            database.get('rutas').find({nombre: reto}).set("actividad", "Correr").write()
+            database.get('retos').find({nombre: reto}).set("actividad", "Correr").write()
             colectionMain.loadReto()
         }
     }
