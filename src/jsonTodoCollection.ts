@@ -3,9 +3,11 @@ import { TodoCollection } from "./TodoCollection"
 import * as lowdb from "lowdb"
 import FileSync from "lowdb/adapters/FileSync"
 import { Actividad } from "./Actividad"
+import { Reto } from "./Reto"
 
 type schemaType = {
-    rutas: Ruta[]
+    rutas: Ruta[],
+    retos: Reto[]
 }
 
 export class jsonTodoCollection extends TodoCollection{
@@ -16,6 +18,7 @@ export class jsonTodoCollection extends TodoCollection{
         const low = require('lowdb');
         this.database = low(new FileSync('./src/json/database.json'))
         this.loadRuta();
+        this.loadReto();
     }
 
     loadRuta(){
@@ -38,8 +41,20 @@ export class jsonTodoCollection extends TodoCollection{
         }
     }
 
-    // Probando cosas
-    addRuta(nombre: string, inicio: Geolocalizacion, final: Geolocalizacion, longitud: number, desnivel: number, usuarios: string[], actividad: Actividad, calificacion: number){
-        let result = super.addRuta(nombre, inicio, final, longitud, desnivel, usuarios, actividad, calificacion)
+    loadReto(){
+        if (this.database.has('rutas').value()){
+            const dbItem = this.database.get('retos').value();
+            let aux: Reto;
+            dbItem.forEach((element: any, index:number) =>{
+                aux = new Reto(
+                    element.nombre as string,
+                    element.rutas as Ruta[],
+                    element.actividad as Actividad,
+                    element.usuarios as string[]
+                )
+                this.itemMapReto.set(aux.nombre, aux);
+            })
+        }
     }
+
 }

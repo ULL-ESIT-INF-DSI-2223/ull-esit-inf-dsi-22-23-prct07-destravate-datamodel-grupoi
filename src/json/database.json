@@ -201,5 +201,163 @@
       "actividad": "Bicicleta",
       "calificacion": 3
     }
+  ],
+  "retos": [
+    {
+      "nombre": "Reto 1",
+      "rutas": [
+        {
+          "nombre": "Ruta 9",
+          "inicio": {
+            "latitud": 40.4168,
+            "longitud": -3.7038
+          },
+          "final": {
+            "latitud": 40.4799,
+            "longitud": -3.7038
+          },
+          "longitud": 30,
+          "desnivel": 1000,
+          "usuario": [
+            "1",
+            "2",
+            "3"
+          ],
+          "actividad": "Correr",
+          "calificacion": 7.3
+        },
+        {
+          "nombre": "Ruta 7",
+          "inicio": {
+            "latitud": 40.4168,
+            "longitud": -3.7038
+          },
+          "final": {
+            "latitud": 40.4799,
+            "longitud": -3.7038
+          },
+          "longitud": 18,
+          "desnivel": 600,
+          "usuario": [
+            "1",
+            "2",
+            "3"
+          ],
+          "actividad": "Correr",
+          "calificacion": 9.8
+        }
+      ],
+      "actividad": "Correr",
+      "total": 48,
+      "usuarios": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "nombre": "Reto 2",
+      "rutas": [
+        {
+          "nombre": "Ruta 10",
+          "inicio": {
+            "latitud": 41.3851,
+            "longitud": 2.1734
+          },
+          "final": {
+            "latitud": 41.3984,
+            "longitud": 2.1741
+          },
+          "longitud": 35,
+          "desnivel": 1100,
+          "usuario": [
+            "1",
+            "2",
+            "3"
+          ],
+          "actividad": "Bicicleta",
+          "calificacion": 3
+        },
+        {
+          "nombre": "Ruta 6",
+          "inicio": {
+            "latitud": 41.3851,
+            "longitud": 2.1734
+          },
+          "final": {
+            "latitud": 41.3984,
+            "longitud": 2.1741
+          },
+          "longitud": 25,
+          "desnivel": 800,
+          "usuario": [
+            "1",
+            "2",
+            "3"
+          ],
+          "actividad": "Bicicleta",
+          "calificacion": 9.5
+        }
+      ],
+      "actividad": "Bicicleta",
+      "total": 60,
+      "usuarios": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "nombre": "Reto 3",
+      "rutas": [
+        {
+          "nombre": "Ruta 1",
+          "inicio": {
+            "latitud": 40.45,
+            "longitud": -4
+          },
+          "final": {
+            "latitud": 39.879,
+            "longitud": -3.456
+          },
+          "longitud": 10,
+          "desnivel": 600,
+          "usuario": [
+            "1",
+            "2",
+            "3"
+          ],
+          "actividad": "Correr",
+          "calificacion": 7
+        },
+        {
+          "nombre": "Ruta 3",
+          "inicio": {
+            "latitud": 40.4168,
+            "longitud": -3.7038
+          },
+          "final": {
+            "latitud": 40.4799,
+            "longitud": -3.7038
+          },
+          "longitud": 8,
+          "desnivel": 300,
+          "usuario": [
+            "1",
+            "2",
+            "3"
+          ],
+          "actividad": "Correr",
+          "calificacion": 4.2
+        }
+      ],
+      "actividad": "Correr",
+      "total": 18,
+      "usuarios": [
+        "1",
+        "2",
+        "3"
+      ]
+    }
   ]
 }
