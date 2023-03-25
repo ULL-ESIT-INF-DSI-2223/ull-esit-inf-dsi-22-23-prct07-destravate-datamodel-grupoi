@@ -9,7 +9,7 @@ export class Usuario{
     
     private _id:string;
     private _nombre:string;
-    private _actividad:Actividad[];
+    private _actividad:Actividad;
     private _amigos: string[];
     private _grupos: string[]; // _grupos CLASE
     private _estadisticas : EstadisticasEntrenamiento;
@@ -28,7 +28,7 @@ export class Usuario{
         let generadorId = GeneradorIdUnicos.getInstance();
         this._id = generadorId.generateUniqueId();
 
-        this._actividad =[];
+    
     
     
     
@@ -114,28 +114,14 @@ export class Usuario{
         return this._historicoRutas;
     }
     
-    // metodos para agregar elmiminar actividades.
+    // metodos para modificar la actividad.
 
     /**
      * Método para añadir una actividad a la lista 
      * @param actividad actividad a añadir a la lista
      */
     agregarActividad(actividad:Actividad){
-        this._actividad.push(actividad);
-    }
-
-    /**
-     * Método para eliminar actividades
-     * @param index indice de la actividad que se quiere eliminar.
-     */
-    eliminarActividad(index:number){
-        let sol:Actividad[] = [];
-        for(let i = 0; i < this._actividad.length; i++){
-            if(i != index){
-                sol.push(this._actividad[i]);
-            }
-        }
-        this._actividad = sol;
+        this._actividad = actividad;
     }
 
     // metodos para agregar eliminar _grupos
