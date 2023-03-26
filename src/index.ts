@@ -269,11 +269,11 @@ async function promptRutaOrdenada(tipo: Ruta_Ordenar): Promise<void>{
             if (tipo === Ruta_Ordenar.Nombre){
                 console.log(JSON.stringify(database.get('rutas').sortBy('_nombre').value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Longitud){
-                console.log(JSON.stringify(database.get('rutas').sortBy('_longitud').value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy(function(obj: Record<string,string>){return Number(obj._longitud)}).value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Actividad){
                 console.log(JSON.stringify(database.get('rutas').sortBy('_actividad').value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Calificacion){
-                console.log(JSON.stringify(database.get('rutas').sortBy('_calificacion').value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy(function(obj: Record<string,string>){return Number(obj._calificacion)}).value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Usuarios){
                 console.log(JSON.stringify(database.get('rutas').sortBy((ruta: any) => ruta._usuarios.length).value(), null, '\t'));
             }else{
@@ -283,11 +283,11 @@ async function promptRutaOrdenada(tipo: Ruta_Ordenar): Promise<void>{
             if (tipo === Ruta_Ordenar.Nombre){
                 console.log(JSON.stringify(database.get('rutas').sortBy('_nombre').reverse().value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Longitud){
-                console.log(JSON.stringify(database.get('rutas').sortBy('_longitud').reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy(function(obj: Record<string,string>){return Number(obj._longitud)}).reverse().value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Actividad){
                 console.log(JSON.stringify(database.get('rutas').sortBy('_actividad').reverse().value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Calificacion){
-                console.log(JSON.stringify(database.get('rutas').sortBy('_calificacion').reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy(function(obj: Record<string,string>){return Number(obj._calificacion)}).reverse().value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Usuarios){
                 console.log(JSON.stringify(database.get('rutas').sortBy((ruta: any) => ruta._usuarios.length).reverse().value(), null, '\t'));
             }else{
