@@ -9,6 +9,7 @@ export class Grupo {
   private _id: string;
   private _nombre: string;
   private _miembrosID: string[];
+  private _propietarioID: string;
 
   private _estadisticas: EstadisticasEntrenamiento;
 
@@ -91,6 +92,13 @@ export class Grupo {
     return this._historicoRutas;
   }
 
+  /**
+   * Retornal el ID del propietario del grupo
+   */
+  get propietarioID(): string {
+    return this._propietarioID; 
+  }
+
   // Setters
 
   /**
@@ -99,6 +107,14 @@ export class Grupo {
    */
   set nombre(nombre: string) {
     this._nombre = nombre;
+  }
+  
+  /**
+   * Establece el propietario del grupo
+   * @param ID - El ID del propietario del grupo
+   */
+  set propietarioID(ID: string) {
+    this._propietarioID = this.propietarioID;
   }
 
   /**
@@ -137,7 +153,7 @@ export class Grupo {
    * Establece las rutas favoritas del grupo
    * @param rutas - Las rutas que se van a establecer como favoritas
    */
-  set rutas(rutas: string[]) {
+  set rutasFav(rutas: string[]) {
     this._rutasFav = rutas;
   }
 

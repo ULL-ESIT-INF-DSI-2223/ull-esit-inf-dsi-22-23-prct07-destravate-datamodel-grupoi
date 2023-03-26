@@ -59,7 +59,7 @@ export async function promptUsuario(): Promise<void>{
 
 
 /*-----------------AÑADIR Usuario-----------------*/
-async function promptAddUsuario(): Promise<void> {
+export async function promptAddUsuario(): Promise<void> {
     const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     let nombre = ""

@@ -114,6 +114,87 @@ export class Usuario{
         return this._historicoRutas;
     }
     
+    /**
+     * Setter para el atributo _id.
+     * 
+     * @param value El valor que se asignará al atributo.
+     */
+    set Id(value: string) {
+        this._id = value;
+    }
+    
+    /**
+     * Setter para el atributo _nombre.
+     * 
+     * @param value El valor que se asignará al atributo.
+     */
+    set nombre(value: string) {
+        this._nombre = value;
+    }
+    
+    /**
+     * Setter para el atributo _actividad.
+     * 
+     * @param value El valor que se asignará al atributo.
+     */
+    set actividad(value: Actividad) {
+        this._actividad = value;
+    }
+    
+    /**
+     * Setter para el atributo _amigos.
+     * 
+     * @param value El valor que se asignará al atributo.
+     */
+    set amigos(value: string[]) {
+        this._amigos = value;
+    }
+    
+    /**
+     * Setter para el atributo _grupos.
+     * 
+     * @param value El valor que se asignará al atributo.
+     */
+    set grupos(value: string[]) {
+        this._grupos = value;
+    }
+    
+    /**
+     * Setter para el atributo _estadisticas.
+     * 
+     * @param value El valor que se asignará al atributo.
+     */
+    set estadisticas(value: EstadisticasEntrenamiento) {
+        this._estadisticas = value;
+    }
+    
+    /**
+     * Setter para el atributo _rutas.
+     * 
+     * @param value El valor que se asignará al atributo.
+     */
+    set rutas(value: string[]) {
+        this._rutas = value;
+    }
+    
+    /**
+     * Setter para el atributo _retos.
+     * 
+     * @param value El valor que se asignará al atributo.
+     */
+    set retos(value: string[]) {
+        this._retos = value;
+    }
+    
+    /**
+     * Setter para el atributo _historicoRutas.
+     * 
+     * @param value El valor que se asignará al atributo.
+     */
+    set historicoRutas(value: Map<string, string[]>) {
+        this._historicoRutas = value;
+    }
+
     // metodos para modificar la actividad.
 
     /**
@@ -191,7 +272,7 @@ export class Usuario{
      * Método para agregar amigos
      * @param id id del amigo a agregar
      */
-    agregarAmigo(id:string){
+    public agregarAmigo(id:string){
         if(!this._amigos.includes(id)){
             this._amigos.push(id);
         }
