@@ -1,6 +1,7 @@
 {
   "rutas": [
     {
+      "_id": "id-1",
       "_nombre": "Ruta 1",
       "_inicio": {
         "latitud": "40.45",
@@ -17,30 +18,32 @@
       "_calificacion": "7"
     },
     {
+      "_id": "id-2",
       "_nombre": "Ruta 2",
       "_inicio": {
-        "latitud": "41.3851",
-        "longitud": "2.1734"
+        "latitud": "41.3984",
+        "longitud": "2.1731"
       },
       "_final": {
-        "latitud": "41.3984",
-        "longitud": "2.1741"
+        "latitud": "41.40",
+        "longitud": "2.16"
       },
       "_longitud": "15",
       "_desnivel": "200",
       "_usuarios": [],
-      "_actividad": 2,
+      "_actividad": 0,
       "_calificacion": "4.5"
     },
     {
+      "_id": "id-3",
       "_nombre": "Ruta 3",
       "_inicio": {
-        "latitud": "40.4168",
-        "longitud": "-3.7038"
+        "latitud": "40.16",
+        "longitud": "-3.7"
       },
       "_final": {
-        "latitud": "40.4799",
-        "longitud": "-3.7038"
+        "latitud": "40.47",
+        "longitud": "-3.70"
       },
       "_longitud": "8",
       "_desnivel": "300",
@@ -49,30 +52,32 @@
       "_calificacion": "4.2"
     },
     {
+      "_id": "id-4",
       "_nombre": "Ruta 4",
       "_inicio": {
-        "latitud": "41.3851",
-        "longitud": "2.1734"
+        "latitud": "41.36",
+        "longitud": "23.45"
       },
       "_final": {
-        "latitud": "41.3984",
-        "longitud": "2.1741"
+        "latitud": "34.23",
+        "longitud": "45.56"
       },
       "_longitud": "12",
       "_desnivel": "400",
       "_usuarios": [],
-      "_actividad": 2,
+      "_actividad": 0,
       "_calificacion": "8.9"
     },
     {
+      "_id": "id-5",
       "_nombre": "Ruta 5",
       "_inicio": {
-        "latitud": "40.4168",
-        "longitud": "-3.7038"
+        "latitud": "34.34",
+        "longitud": "45.56"
       },
       "_final": {
-        "latitud": "40.4799",
-        "longitud": "-3.7038"
+        "latitud": "56.67",
+        "longitud": "65.54"
       },
       "_longitud": "20",
       "_desnivel": "700",
@@ -81,166 +86,179 @@
       "_calificacion": "5.4"
     },
     {
+      "_id": "id-24",
       "_nombre": "Ruta 6",
       "_inicio": {
-        "latitud": "41.3851",
-        "longitud": "2.1734"
+        "latitud": "23.34",
+        "longitud": "34.34"
       },
       "_final": {
-        "latitud": "41.3984",
-        "longitud": "2.1741"
+        "latitud": "43.32",
+        "longitud": "32.3"
       },
-      "_longitud": "25",
-      "_desnivel": "800",
-      "_usuarios": [],
-      "_actividad": 2,
-      "_calificacion": "9.5"
+      "_longitud": "40",
+      "_desnivel": "500",
+      "_usuarios": [
+        "id-6",
+        "id-9",
+        "id-10"
+      ],
+      "_actividad": 1,
+      "_calificacion": "7.8"
     },
     {
+      "_id": "id-25",
       "_nombre": "Ruta 7",
       "_inicio": {
-        "latitud": "40.4168",
-        "longitud": "-3.7038"
+        "latitud": "12.2",
+        "longitud": "-3.2"
       },
       "_final": {
-        "latitud": "40.4799",
-        "longitud": "-3.7038"
+        "latitud": "12.5",
+        "longitud": "-4.3"
       },
-      "_longitud": "18",
-      "_desnivel": "600",
-      "_usuarios": [],
+      "_longitud": "3",
+      "_desnivel": "100",
+      "_usuarios": [
+        "id-6",
+        "id-11",
+        "id-12",
+        "id-13"
+      ],
       "_actividad": 1,
+      "_calificacion": "6.7"
+    },
+    {
+      "_id": "id-26",
+      "_nombre": "Ruta 8",
+      "_inicio": {
+        "latitud": "12.34",
+        "longitud": "23.34"
+      },
+      "_final": {
+        "latitud": "45.56",
+        "longitud": "45.56"
+      },
+      "_longitud": "98",
+      "_desnivel": "400",
+      "_usuarios": [
+        "id-9",
+        "id-10"
+      ],
+      "_actividad": 0,
       "_calificacion": "9.8"
     },
     {
-      "_nombre": "Ruta 8",
-      "_inicio": {
-        "latitud": "41.3851",
-        "longitud": "2.1734"
-      },
-      "_final": {
-        "latitud": "41.3984",
-        "longitud": "2.1741"
-      },
-      "_longitud": "22",
-      "_desnivel": "900",
-      "_usuarios": [],
-      "_actividad": 2,
-      "_calificacion": "6.5"
-    },
-    {
+      "_id": "id-27",
       "_nombre": "Ruta 9",
       "_inicio": {
-        "latitud": "40.4168",
-        "longitud": "-3.7038"
+        "latitud": "34.54",
+        "longitud": "56.76"
       },
       "_final": {
-        "latitud": "40.4799",
-        "longitud": "-3.7038"
+        "latitud": "56.78",
+        "longitud": "76.65"
       },
-      "_longitud": "30",
-      "_desnivel": "1000",
-      "_usuarios": [],
+      "_longitud": "68",
+      "_desnivel": "600",
+      "_usuarios": [
+        "id-9",
+        "id-10",
+        "id-11",
+        "id-14"
+      ],
       "_actividad": 1,
-      "_calificacion": "7.3"
+      "_calificacion": "8.75"
     },
     {
+      "_id": "id-28",
       "_nombre": "Ruta 10",
       "_inicio": {
-        "latitud": "41.3",
-        "longitud": "2.17"
+        "latitud": "12.67",
+        "longitud": "65.76"
       },
       "_final": {
-        "latitud": "42.23",
-        "longitud": "3.17"
-      },
-      "_longitud": "36",
-      "_desnivel": "1110",
-      "_usuarios": [
-        "id-14"
-      ],
-      "_actividad": 1,
-      "_calificacion": "3.2"
-    },
-    {
-      "_id": "id-33",
-      "_nombre": "La Laguna",
-      "_inicio": {
-        "latitud": "23.34",
-        "longitud": "45.4"
-      },
-      "_final": {
-        "latitud": "12.23",
-        "longitud": "34.45"
+        "latitud": "54.34",
+        "longitud": "32.23"
       },
       "_longitud": "130",
-      "_desnivel": "500",
+      "_desnivel": "800",
       "_usuarios": [
-        "id-14"
+        "id-6",
+        "id-7",
+        "id-8",
+        "id-9",
+        "id-10",
+        "id-11",
+        "id-12",
+        "id-13",
+        "id-14",
+        "id-15"
       ],
-      "_actividad": 1,
+      "_actividad": 0,
       "_calificacion": "10"
     }
   ],
   "retos": [
     {
-      "_id": "id-27",
-      "_nombre": "Reto 2",
+      "_id": "id-21",
+      "_nombre": "Norte Tenerife",
       "_rutas": [
-        "Ruta 9",
-        "Ruta 10"
+        "Ruta 1",
+        "Ruta 3",
+        "Ruta 4"
       ],
-      "_actividad": 2,
-      "_total": 66,
+      "_actividad": 1,
+      "_total": 30,
       "_usuarios": [
-        "id-14",
-        "id-17"
+        "id-6",
+        "id-10",
+        "id-11"
       ]
     },
     {
-      "_id": "id-28",
-      "_nombre": "Reto 1",
+      "_id": "id-22",
+      "_nombre": "Sur Tenerife",
+      "_rutas": [
+        "Ruta 2",
+        "Ruta 5"
+      ],
+      "_actividad": 0,
+      "_total": 35,
+      "_usuarios": [
+        "id-8",
+        "id-9",
+        "id-10"
+      ]
+    },
+    {
+      "_id": "id-23",
+      "_nombre": "La Palma",
       "_rutas": [
         "Ruta 1",
         "Ruta 2",
         "Ruta 3",
         "Ruta 4"
       ],
-      "_actividad": 0,
+      "_actividad": 1,
       "_total": 45,
       "_usuarios": [
-        "id-14"
-      ]
-    },
-    {
-      "_id": "id-29",
-      "_nombre": "Reto 3",
-      "_rutas": [
-        "Ruta 2"
-      ],
-      "_actividad": 0,
-      "_total": 15,
-      "_usuarios": [
-        "id-14",
-        "id-16",
-        "id-17"
+        "id-8",
+        "id-9",
+        "id-12",
+        "id-13"
       ]
     }
   ],
   "usuarios": [
     {
-      "_id": "id-14",
+      "_id": "id-6",
       "_nombre": "Diego",
       "_actividad": [
         1
       ],
-      "_amigos": [
-        "id-01",
-        "id-02"
-      ],
-      "_grupos": [
-        "id-03"
-      ],
+      "_amigos": [],
+      "_grupos": [],
       "_estadisticas": {
         "kmAcumuladosSemana": 0,
         "desnivelAcumuladoSemana": 0,
@@ -251,24 +269,47 @@
       },
       "_rutas": [
         "Ruta 1",
-        "Ruta 3",
-        "Ruta 5"
+        "Ruta 3"
       ],
       "_retos": [],
       "_historicoRutas": {}
     },
     {
-      "_id": "id-16",
+      "_id": "id-7",
       "_nombre": "Dani",
       "_actividad": [
-        1
+        "Correr"
       ],
       "_amigos": [
-        "id-14"
+        "id-6"
       ],
-      "_grupos": [
-        "id-03"
+      "_grupos": [],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 1"
       ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-8",
+      "_nombre": "Kevin",
+      "_actividad": [
+        "Correr",
+        "Bicicleta"
+      ],
+      "_amigos": [
+        "id-6",
+        "id-7"
+      ],
+      "_grupos": [],
       "_estadisticas": {
         "kmAcumuladosSemana": 0,
         "desnivelAcumuladoSemana": 0,
@@ -284,16 +325,322 @@
       "_historicoRutas": {}
     },
     {
-      "_id": "id-17",
-      "_nombre": "Juan",
+      "_id": "id-9",
+      "_nombre": "Evo",
       "_actividad": [
-        1
+        "Correr"
       ],
       "_amigos": [
-        "id-17"
+        "id-6"
+      ],
+      "_grupos": [],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 2",
+        "Ruta 3"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-10",
+      "_nombre": "Carola",
+      "_actividad": [
+        "Correr"
+      ],
+      "_amigos": [
+        "id-6",
+        "id-9"
+      ],
+      "_grupos": [],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-11",
+      "_nombre": "Javi",
+      "_actividad": [
+        "Correr"
+      ],
+      "_amigos": [
+        "id-6",
+        "id-9",
+        "id-10"
+      ],
+      "_grupos": [],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 2",
+        "Ruta 3",
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-12",
+      "_nombre": "Sare",
+      "_actividad": [
+        "Bicicleta"
+      ],
+      "_amigos": [
+        "id-6"
+      ],
+      "_grupos": [],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 1",
+        "Ruta 2",
+        "Ruta 3",
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-13",
+      "_nombre": "Noe",
+      "_actividad": [
+        "Bicicleta"
+      ],
+      "_amigos": [
+        "id-6",
+        "id-8",
+        "id-9"
+      ],
+      "_grupos": [],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 3",
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-14",
+      "_nombre": "Miriam",
+      "_actividad": [
+        "Bicicleta"
+      ],
+      "_amigos": [
+        "id-6",
+        "id-11",
+        "id-12"
+      ],
+      "_grupos": [],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 1"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-15",
+      "_nombre": "Dorothy",
+      "_actividad": [
+        "Correr"
+      ],
+      "_amigos": [
+        "id-9",
+        "id-12",
+        "id-13",
+        "id-14"
+      ],
+      "_grupos": [],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 3",
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-30",
+      "_nombre": "Claudio",
+      "_actividad": [
+        "Bicicleta"
+      ],
+      "_amigos": [
+        "id-6"
       ],
       "_grupos": [
-        "id-03"
+        "id-17"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 2",
+        "Ruta 3"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-31",
+      "_nombre": "Angela",
+      "_actividad": [
+        "Correr"
+      ],
+      "_amigos": [
+        "id-8",
+        "id-9"
+      ],
+      "_grupos": [
+        "id-18",
+        "id-19"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 2",
+        "Ruta 5",
+        "Ruta 6"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-32",
+      "_nombre": "Rebeca",
+      "_actividad": [
+        "Bicicleta"
+      ],
+      "_amigos": [
+        "id-6",
+        "id-9",
+        "id-13",
+        "id-14",
+        "id-15"
+      ],
+      "_grupos": [
+        "id-20"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 4",
+        "Ruta 10"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-33",
+      "_nombre": "Matteo",
+      "_actividad": [
+        "Bicicleta"
+      ],
+      "_amigos": [
+        "id-8",
+        "id-9"
+      ],
+      "_grupos": [
+        "id-18",
+        "id-19"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 4",
+        "Ruta 6",
+        "Ruta 7"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-34",
+      "_nombre": "Giulia",
+      "_actividad": [
+        "Correr"
+      ],
+      "_amigos": [
+        "id-8",
+        "id-9"
+      ],
+      "_grupos": [
+        "id-18",
+        "id-19"
       ],
       "_estadisticas": {
         "kmAcumuladosSemana": 0,
@@ -308,14 +655,165 @@
       ],
       "_retos": [],
       "_historicoRutas": {}
-    }
-  ],
-  "grupos": [
+    },
     {
-      "_id": "id-30",
-      "_nombre": "Grupo 1",
-      "_miembrosID": [
-        "id-14",
+      "_id": "id-35",
+      "_nombre": "Vinyet",
+      "_actividad": [
+        "Bicicleta"
+      ],
+      "_amigos": [
+        "id-9",
+        "id-12"
+      ],
+      "_grupos": [
+        "id-17",
+        "id-18"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 4",
+        "Ruta 7",
+        "Ruta 9",
+        "Ruta 10"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-36",
+      "_nombre": "Monica",
+      "_actividad": [
+        "Correr"
+      ],
+      "_amigos": [
+        "id-8",
+        "id-9"
+      ],
+      "_grupos": [
+        "id-18"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 3",
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-37",
+      "_nombre": "Alex",
+      "_actividad": [
+        "Correr"
+      ],
+      "_amigos": [
+        "id-7",
+        "id-8"
+      ],
+      "_grupos": [
+        "id-16"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 3",
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-38",
+      "_nombre": "Daniel",
+      "_actividad": [
+        "Bicicleta"
+      ],
+      "_amigos": [
+        "id-7"
+      ],
+      "_grupos": [
+        "id-18",
+        "id-19"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 3",
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-39",
+      "_nombre": "Carlos",
+      "_actividad": [
+        "Correr"
+      ],
+      "_amigos": [
+        "id-6",
+        "id-10",
+        "id-11",
+        "id-12",
+        "id-13",
+        "id-30"
+      ],
+      "_grupos": [
+        "id-18"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_rutas": [
+        "Ruta 4",
+        "Ruta 5",
+        "Ruta 6"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-40",
+      "_nombre": "Sara",
+      "_actividad": [
+        "Correr"
+      ],
+      "_amigos": [
+        "id-6"
+      ],
+      "_grupos": [
         "id-17"
       ],
       "_estadisticas": {
@@ -326,20 +824,55 @@
         "kmAcumuladosAnio": 0,
         "desnivelAcumuladoAnio": 0
       },
+      "_rutas": [
+        "Ruta 3",
+        "Ruta 4"
+      ],
+      "_retos": [],
+      "_historicoRutas": {}
+    }
+  ],
+  "grupos": [
+    {
+      "_id": "id-16",
+      "_nombre": "Sicue",
+      "_miembrosID": [
+        "id-6",
+        "id-9",
+        "id-10",
+        "id-13"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
       "_ranking": [
-        "id-14",
-        "id-16"
+        "id-6",
+        "id-9",
+        "id-10",
+        "id-13"
       ],
       "_rutasFav": [],
       "_historicoRutas": {}
     },
     {
-      "_id": "id-32",
-      "_nombre": "Grupo 2",
+      "_id": "id-17",
+      "_nombre": "La Laguna",
       "_miembrosID": [
+        "id-6",
+        "id-7",
+        "id-8",
+        "id-9",
+        "id-10",
+        "id-11",
+        "id-12",
+        "id-13",
         "id-14",
-        "id-16",
-        "id-17"
+        "id-15"
       ],
       "_estadisticas": {
         "kmAcumuladosSemana": 0,
@@ -350,9 +883,92 @@
         "desnivelAcumuladoAnio": 0
       },
       "_ranking": [
+        "id-6",
+        "id-7",
+        "id-8",
+        "id-9",
+        "id-10",
+        "id-11",
+        "id-12",
+        "id-13",
         "id-14",
-        "id-16",
-        "id-17"
+        "id-15"
+      ],
+      "_rutasFav": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-18",
+      "_nombre": "Informatica",
+      "_miembrosID": [
+        "id-6",
+        "id-7",
+        "id-8"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_ranking": [
+        "id-6",
+        "id-7",
+        "id-8"
+      ],
+      "_rutasFav": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-19",
+      "_nombre": "Senderismo Tenerife",
+      "_miembrosID": [
+        "id-8",
+        "id-11",
+        "id-12",
+        "id-13"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_ranking": [
+        "id-8",
+        "id-11",
+        "id-12",
+        "id-13"
+      ],
+      "_rutasFav": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-20",
+      "_nombre": "Tacoronte",
+      "_miembrosID": [
+        "id-8",
+        "id-9",
+        "id-11",
+        "id-12"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_ranking": [
+        "id-8",
+        "id-9",
+        "id-11",
+        "id-12"
       ],
       "_rutasFav": [],
       "_historicoRutas": {}
@@ -361,7 +977,7 @@
   "ultimoidUnico": [
     {
       "nombre": "id_unico",
-      "id": 33
+      "id": 40
     }
   ]
 }

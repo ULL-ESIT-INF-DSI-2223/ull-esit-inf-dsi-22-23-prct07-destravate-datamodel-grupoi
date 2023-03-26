@@ -63,7 +63,7 @@ export async function promptUsuario(): Promise<void>{
 async function promptAddUsuario(): Promise<void> {
     console.clear();
     let nombre = ""
-    let actividad = Actividad.Bicicleta
+    let actividad: Actividad[] = []
     
     // Sacar el id de los usuarios para que escoja sus amigos 
     let amigos:string[] = [];
@@ -78,7 +78,7 @@ async function promptAddUsuario(): Promise<void> {
     let jsonGrupo = database;
 
     for(let i in jsonGrupo.toJSON().grupos){
-        grupos.push(jsonGrupo.toJSON().grupos[i].id);
+        grupos.push(jsonGrupo.toJSON().grupos[i]._id);
     }
     
     // Sacar las rutas para que las elija el usuario
@@ -86,7 +86,7 @@ async function promptAddUsuario(): Promise<void> {
     let jsonRuta = database;
     
     for(let i in jsonRuta.toJSON().rutas){
-        rutas.push(jsonRuta.toJSON().rutas[i].nombre);
+        rutas.push(jsonRuta.toJSON().rutas[i]._nombre);
     }
 
     const answers = await inquirer.prompt([
@@ -96,7 +96,7 @@ async function promptAddUsuario(): Promise<void> {
         message: "Introduce el nombre del Usuario: "
     },
     {
-        type: 'list',
+        type: 'checkbox',
         name: 'actividad',
         message: 'Escoge el tipo de actividad (Correr o Bicicleta): ',
         choices: Object.values(Actividades)
@@ -125,17 +125,11 @@ async function promptAddUsuario(): Promise<void> {
             grupos = answers.grupo;
             rutas = answers.rutas;
             actividad = answers.actividad;
-            switch (answers["actividad"]) {
-                case Actividades.Correr:
-                    actividad = Actividad.Correr
-                    break;
-                case Actividades.Bicicleta:
-                    actividad = Actividad.Bicicleta
-                    break;
-            }
     })
     let new_usuario = new Usuario(nombre);
-    new_usuario.agregarActividad(actividad);
+    actividad.forEach((element) =>{
+        new_usuario.agregarActividad(element);
+    })
     amigos.forEach((amigo) => {
         new_usuario.agregarAmigo(amigo);
     });
@@ -265,15 +259,15 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
     }
     else if (enumerado === Usuario_enum.Actividad){
         const respuesta = await inquirer.prompt({
-            type: 'list',
+            type: 'checkbox',
             name: 'actividad',
             message: 'Escoge el tipo de actividad (Correr o Bicicleta): ',
             choices: Object.values(Actividades)
         })
         if(respuesta.actividad === "Bicicleta"){
-            database.get('usuarios').find({_nombre: usuario}).set("_actividad", "Bicicleta").write()
+            database.get('usuarios').find({_nombre: usuario}).set("_actividad", respuesta.actividad).write()
         }else{
-            database.get('usuarios').find({_nombre: usuario}).set("_actividad", "Correr").write()
+            database.get('usuarios').find({_nombre: usuario}).set("_actividad", respuesta.actividad).write()
         }
     }
     else if (enumerado === Usuario_enum.Amigo){
