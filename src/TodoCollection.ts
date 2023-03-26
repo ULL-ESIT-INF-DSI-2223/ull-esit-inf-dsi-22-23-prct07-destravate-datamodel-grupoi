@@ -39,7 +39,7 @@ export class TodoCollection{
         this.itemMapGrupo.delete(nombre);
     }
 
-    addReto(nombre: string, rutas: Ruta[], actividad: Actividad, /*usuarios: Usuario*/ usuarios: string[]){
+    addReto(nombre: string, rutas: string[], actividad: Actividad, /*usuarios: Usuario*/ usuarios: string[]){
         const reto = new Reto(nombre, rutas, actividad, usuarios);
         this.itemMapReto.set(nombre, reto);
     }

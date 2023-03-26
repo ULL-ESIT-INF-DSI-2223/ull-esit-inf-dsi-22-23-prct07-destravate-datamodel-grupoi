@@ -16,11 +16,14 @@ describe("Reto: constructor, set y get", () => {
   let ruta1 = new Ruta("Cabo Verde", loc1, loc2, 10, 6, usuarios, Actividad.Correr, 7)
   let ruta2 = new Ruta("Cabo Rojo", loc3, loc4, 7, 15, ["id-1", "id-2", "id-7"], Actividad.Bicicleta, 8.5)
 
-  let rutas = [ruta1, ruta2]
-  let rutas2 = [ruta2]
+  let rutas = [ruta1.nombre, ruta2.nombre]
+  let rutas2 = [ruta2.nombre]
 
   let reto1 = new Reto("Reto 1", rutas, Actividad.Correr, usuarios)
   let reto2 = new Reto("Reto 2", rutas2, Actividad.Bicicleta, usuarios2)
+
+  reto1.total = (ruta1.longitud + ruta2.longitud)
+  reto2.total = ruta2.longitud
 
   it("constructor: ids únicos", () => {
     expect(reto1.id == reto2.id).to.be.equal(false)

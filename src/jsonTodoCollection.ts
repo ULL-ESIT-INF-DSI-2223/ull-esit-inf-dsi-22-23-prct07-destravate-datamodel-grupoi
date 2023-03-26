@@ -51,7 +51,7 @@ export class jsonTodoCollection extends TodoCollection{
             dbItem.forEach((element: any, index:number) =>{
                 aux = new Reto(
                     element.nombre as string,
-                    element.rutas as Ruta[],
+                    element.rutas as string[],
                     element.actividad as Actividad,
                     element.usuarios as string[]
                 )

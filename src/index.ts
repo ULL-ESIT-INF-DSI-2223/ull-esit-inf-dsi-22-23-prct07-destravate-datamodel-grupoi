@@ -7,6 +7,7 @@ import FileSync from 'lowdb/adapters/FileSync';
 import { jsonTodoCollection } from './jsonTodoCollection';
 import { promptUsuario } from './UsuarioInquirer';
 import { GeneradorIdUnicos } from './GeneradorIdUnicos';
+import { Reto } from './Reto';
 /*-----------------------------------DATABASE----------------------------------- */
 
 const low = require('lowdb');
@@ -58,7 +59,8 @@ enum Ruta_enum{
 enum Reto_enum{
     Nombre = "Nombre",
     Rutas = "Rutas",
-    Actividad = "Actividad"
+    Actividad = "Actividad",
+    Usuarios = "Usuarios"
 }
 enum Grupo_enum{
     Nombre = "Nombre",
@@ -493,8 +495,22 @@ async function promptReto(): Promise<void>{
 async function promptAddReto(): Promise<void> {
     console.clear();
     let nombre = ""
-    let rutas: Ruta[]
-    let actividad = Actividad.Bicicleta, total = 0, suarios = ["1"]
+    let actividad = Actividad.Bicicleta, total = 0
+    let usuarios:string[] = []
+    let rutas_todas:string[] = []
+    let rutas:string[] = []
+    let longitud:string[] = []
+    let jsonUsuario = database;
+
+    for (let i in jsonUsuario.toJSON().usuarios){
+        usuarios.push(jsonUsuario.toJSON().usuarios[i]._id)
+    }
+
+    for (let i in jsonUsuario.toJSON().rutas){
+        rutas_todas.push(jsonUsuario.toJSON().rutas[i]._nombre)
+        longitud.push(jsonUsuario.toJSON().rutas[i]._longitud)
+    }
+
     const answers = await inquirer.prompt([
     {
         type: "input",
@@ -502,9 +518,10 @@ async function promptAddReto(): Promise<void> {
         message: "Introduce el nombre del reto: "
     },
     {
-        type: "input",
+        type: "checkbox",
         name: "rutas",
-        message: "Introduce el nombre"
+        message: "Introduce las rutas del reto: ",
+        choices: Object.values(rutas_todas)
     },
     {
         type: 'list',
@@ -512,9 +529,16 @@ async function promptAddReto(): Promise<void> {
         message: 'Escoge el tipo de actividad (Correr o Bicicleta): ',
         choices: Object.values(Actividades)
     },
+    {
+        type: "checkbox",
+        name: "usuarios",
+        message: "Introduce los usuarios que están realizando el reto",
+        choices: Object.values(usuarios)
+    },
     ]).then((answers) => {
             nombre = answers.name;
             rutas = answers.rutas;
+            usuarios = answers.usuarios;
             switch (answers["actividad"]) {
                 case Actividades.Correr:
                     actividad = Actividad.Correr
@@ -525,18 +549,18 @@ async function promptAddReto(): Promise<void> {
             }
     })
 
-    // Aqui el total deberia tener otra forma ya que se deberia recorrer las rutas y calcularlo
-    const new_reto = {
-        "nombre": nombre,
-        "rutas": [
+    /* Con esto averigua el total de todas las rutas seleccionadas */
+    rutas.forEach((elemento)=>{
+        let i = rutas_todas.indexOf(elemento)
+        total += Number(longitud[i])
+    })
 
-        ],
-        "actividad": actividad,
-        "total": total,
-        "usuarios": [
-            "1"
-        ]
-    }
+    // Aqui el total deberia tener otra forma ya que se deberia recorrer las rutas y calcularlo
+    const new_reto = new Reto(nombre, rutas, actividad, usuarios);
+    new_reto.total = total
+    const numberString = new_reto.id.replace(/^id-/, '');
+    const lastId = parseInt(numberString);
+    database.get('ultimoidUnico').find({nombre: "id_unico"}).set("id", lastId).write();
     database.get('retos').push(new_reto).write();
     promptReto();
 }
@@ -586,21 +610,21 @@ async function promptRetoOrdenado(tipo: Reto_Ordenar): Promise<void>{
     }).then(async answers => {
         if (answers["command"] === Ascendente_Descendente.Ascendente){
             if (tipo === Reto_Ordenar.Nombre){
-                console.log(JSON.stringify(database.get('retos').sortBy('nombre').value(), null, '\t'));
+                console.log(JSON.stringify(database.get('retos').sortBy('_nombre').value(), null, '\t'));
             }else if (tipo === Reto_Ordenar.Usuarios){
-                console.log(JSON.stringify(database.get('retos').sortBy((reto: any) => reto.usuario.length).value(), null, '\t'));
+                console.log(JSON.stringify(database.get('retos').sortBy((reto: any) => reto._usuarios.length).value(), null, '\t'));
             }else if (tipo === Reto_Ordenar.Total){
-                console.log(JSON.stringify(database.get('retos').sortBy('total').value(), null, '\t'));
+                console.log(JSON.stringify(database.get('retos').sortBy('_total').value(), null, '\t'));
             }else{
                 promptReto();
             }
         } else{
             if (tipo === Reto_Ordenar.Nombre){
-                console.log(JSON.stringify(database.get('retos').sortBy('nombre').reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('retos').sortBy('_nombre').reverse().value(), null, '\t'));
             }else if (tipo === Reto_Ordenar.Usuarios){
-                console.log(JSON.stringify(database.get('retos').sortBy((reto: any) => reto.usuario.length).reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('retos').sortBy((reto: any) => reto._usuarios.length).reverse().value(), null, '\t'));
             }else if (tipo === Reto_Ordenar.Total){
-                console.log(JSON.stringify(database.get('retos').sortBy('total').reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('retos').sortBy('_total').reverse().value(), null, '\t'));
             }else{
                 promptReto();
             }
@@ -619,12 +643,26 @@ async function promptRetoOrdenado(tipo: Reto_Ordenar): Promise<void>{
 
 }
 
-/*-----------------MODIFICAR RUTA-----------------*/
+/*-----------------MODIFICAR RETOS-----------------*/
 
 // Cambia parámetro
 async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void>{
     console.clear();
+    let jsonUsuario = database;
+    let rutas_todas:string[] = []
+    let rutas:string[] = []
+    let longitud:string[] = []
+    let total = 0
+    let usuarios:string[] = []
 
+    for (let i in jsonUsuario.toJSON().usuarios){
+        usuarios.push(jsonUsuario.toJSON().usuarios[i]._id)
+    }
+
+    for (let i in jsonUsuario.toJSON().rutas){
+        rutas_todas.push(jsonUsuario.toJSON().rutas[i]._nombre)
+        longitud.push(jsonUsuario.toJSON().rutas[i]._longitud)
+    }
     if (enumerado === Reto_enum.Nombre){
         const respuesta = await inquirer.prompt({
             type: "input",
@@ -632,17 +670,33 @@ async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void
             message: "Introduzca nuevo nombre: "
         })
         database.get('retos').find({nombre: reto}).set("nombre", respuesta.nombre).write()
-        //colectionMain.loadReto()
     }
     else if (enumerado === Reto_enum.Rutas){
         const respuesta = await inquirer.prompt({
-            type: "number",
+            type: "checkbox",
             name: "rutas",
-            message: "Introduzca nuevas rutas: "
+            message: "Seleccione nuevas rutas: ",
+            choices: Object.values(rutas_todas)
+        }).then((answers) => {
+            rutas = answers.rutas
+            rutas.forEach((elemento)=>{
+                let i = rutas_todas.indexOf(elemento)
+                total += Number(longitud[i])
+            })
+            database.get('retos').find({_nombre: reto}).set("_total", total).write()
+            database.get('retos').find({_nombre: reto}).set("_rutas", rutas).write()
         })
-        // ESTO NO ESTÁ BIEN
-        database.get('retos').find({nombre: reto}).set("rutas", parseInt(respuesta.rutas)).write()
-        //colectionMain.loadReto()
+    }
+    else if (enumerado === Reto_enum.Usuarios){
+        const respuesta = await inquirer.prompt({
+            type: "checkbox",
+            name: "usuarios",
+            message: "Selecciona los usuarios que realizan este reto: ",
+            choices: Object.values(usuarios)
+        }).then((answers) =>{
+            usuarios = answers.usuarios
+            database.get('retos').find({_nombre: reto}).set("_usuarios", usuarios).write()
+        })
     }
     else if (enumerado === Reto_enum.Actividad){
         const respuesta = await inquirer.prompt({
@@ -652,11 +706,9 @@ async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void
             choices: Object.values(Actividades)
         })
         if(respuesta.actividad === "Bicicleta"){
-            database.get('retos').find({nombre: reto}).set("actividad", "Bicicleta").write()
-            //colectionMain.loadReto()
+            database.get('retos').find({nombre: reto}).set("_actividad", 2).write()
         }else{
-            database.get('retos').find({nombre: reto}).set("actividad", "Correr").write()
-            //colectionMain.loadReto()
+            database.get('retos').find({nombre: reto}).set("_actividad", 1).write()
         }
     }
     promptReto();
@@ -686,6 +738,9 @@ async function modifyReto(): Promise<void>{
                 break;
             case Reto_enum.Actividad:
                 modifyParamReto(reto, Reto_enum.Actividad);
+                break;
+            case Reto_enum.Usuarios:
+                modifyParamReto(reto, Reto_enum.Usuarios);
                 break;
         }
     })
@@ -745,7 +800,7 @@ async function promptAddGrupo(): Promise<void> {
     promptGrupo();
 }
 
-/*-----------------ELIMINAR RETO-----------------*/
+/*-----------------ELIMINAR GRUPO-----------------*/
 async function promptRemoveGrupo(): Promise<void>{
     console.clear()
     const respuesta = await inquirer.prompt({
@@ -827,7 +882,7 @@ async function promptGrupoOrdenado(tipo: Grupo_Ordenar): Promise<void>{
 
 }
 
-/*-----------------MODIFICAR RUTA-----------------*/
+/*-----------------MODIFICAR GRUPO-----------------*/
 
 // Cambia parámetro
 async function modifyParamGrupo(grupo: string, enumerado: Grupo_enum): Promise<void>{

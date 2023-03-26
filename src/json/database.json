@@ -165,159 +165,46 @@
   ],
   "retos": [
     {
-      "_nombre": "Reto 1",
-      "_rutas": [
-        {
-          "_nombre": "Ruta 9",
-          "_inicio": {
-            "latitud": 40.4168,
-            "longitud": -3.7038
-          },
-          "_final": {
-            "latitud": 40.4799,
-            "longitud": -3.7038
-          },
-          "_longitud": 30,
-          "_desnivel": 1000,
-          "_usuarios": [
-            "1",
-            "2",
-            "3"
-          ],
-          "_actividad": 1,
-          "_calificacion": 7.3
-        },
-        {
-          "_nombre": "Ruta 7",
-          "_inicio": {
-            "latitud": 40.4168,
-            "longitud": -3.7038
-          },
-          "_final": {
-            "latitud": 40.4799,
-            "longitud": -3.7038
-          },
-          "_longitud": 18,
-          "_desnivel": 600,
-          "_usuarios": [
-            "1",
-            "2",
-            "3"
-          ],
-          "_actividad": 1,
-          "_calificacion": 9.8
-        }
-      ],
-      "_actividad": 1,
-      "_total": 48,
-      "_usuarios": [
-        "1",
-        "2",
-        "3"
-      ]
-    },
-    {
+      "_id": "id-27",
       "_nombre": "Reto 2",
-      "rutas": [
-        {
-          "_nombre": "Ruta 10",
-          "_inicio": {
-            "latitud": 41.3851,
-            "longitud": 2.1734
-          },
-          "_final": {
-            "latitud": 41.3984,
-            "longitud": 2.1741
-          },
-          "_longitud": 35,
-          "_desnivel": 1100,
-          "_usuarios": [
-            "1",
-            "2",
-            "3"
-          ],
-          "_actividad": 2,
-          "_calificacion": 3
-        },
-        {
-          "_nombre": "Ruta 6",
-          "_inicio": {
-            "latitud": 41.3851,
-            "longitud": 2.1734
-          },
-          "_final": {
-            "latitud": 41.3984,
-            "longitud": 2.1741
-          },
-          "_longitud": 25,
-          "_desnivel": 800,
-          "_usuarios": [
-            "1",
-            "2",
-            "3"
-          ],
-          "_actividad": 2,
-          "_calificacion": 9.5
-        }
+      "_rutas": [
+        "Ruta 9",
+        "Ruta 10"
       ],
       "_actividad": 2,
-      "_total": 60,
+      "_total": 66,
       "_usuarios": [
-        "1",
-        "2",
-        "3"
+        "id-14",
+        "id-17"
       ]
     },
     {
+      "_id": "id-28",
+      "_nombre": "Reto 1",
+      "_rutas": [
+        "Ruta 1",
+        "Ruta 2",
+        "Ruta 3",
+        "Ruta 4"
+      ],
+      "_actividad": 0,
+      "_total": 45,
+      "_usuarios": [
+        "id-14"
+      ]
+    },
+    {
+      "_id": "id-29",
       "_nombre": "Reto 3",
       "_rutas": [
-        {
-          "_nombre": "Ruta 1",
-          "_inicio": {
-            "latitud": 40.45,
-            "longitud": -4
-          },
-          "_final": {
-            "latitud": 39.879,
-            "longitud": -3.456
-          },
-          "_longitud": 10,
-          "_desnivel": 600,
-          "_usuarios": [
-            "1",
-            "2",
-            "3"
-          ],
-          "_actividad": 1,
-          "_calificacion": 7
-        },
-        {
-          "_nombre": "Ruta 3",
-          "_inicio": {
-            "latitud": 40.4168,
-            "longitud": -3.7038
-          },
-          "_final": {
-            "latitud": 40.4799,
-            "longitud": -3.7038
-          },
-          "_longitud": 8,
-          "_desnivel": 300,
-          "_usuarios": [
-            "1",
-            "2",
-            "3"
-          ],
-          "_actividad": 1,
-          "_calificacion": 4.2
-        }
+        "Ruta 2"
       ],
-      "_actividad": 1,
-      "_total": 18,
+      "_actividad": 0,
+      "_total": 15,
       "_usuarios": [
-        "1",
-        "2",
-        "3"
+        "id-14",
+        "id-16",
+        "id-17"
       ]
     }
   ],
@@ -415,7 +302,7 @@
   "ultimoidUnico": [
     {
       "nombre": "id_unico",
-      "id": 25
+      "id": 29
     }
   ]
 }
