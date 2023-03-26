@@ -3,6 +3,9 @@
     "./src/Actividad.ts",
     "./src/Reto.ts",
     "./src/Ruta.ts",
+    "./src/EstadisticasEntrenamiento.ts",
+    "./src/Grupo.ts",
+    "./src/Usuario.ts",
   ],
   "out": "./docs",
 }
