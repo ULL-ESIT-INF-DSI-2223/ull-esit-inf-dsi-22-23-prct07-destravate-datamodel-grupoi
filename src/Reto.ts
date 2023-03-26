@@ -11,7 +11,7 @@ import { GeneradorIdUnicos } from "./GeneradorIdUnicos"
 export class Reto{
     private _id: string;
     private _nombre: string;
-    private _rutas: Ruta[];
+    private _rutas: string[];
     private _actividad: Actividad;
     private _total: number;
     private _usuarios: string[];
@@ -24,7 +24,7 @@ export class Reto{
      * @param actividad Tipo de actividad del reto: bicicleta o correr
      * @param usuarios Usuarios que están realizando el reto
      */
-    constructor(nombre: string, rutas: Ruta[], actividad: Actividad, /*usuarios: Usuario*/ usuarios: string[]) {
+    constructor(nombre: string, rutas: string[], actividad: Actividad, /*usuarios: Usuario*/ usuarios: string[]) {
         // Se genera el id único
         let generadorId = GeneradorIdUnicos.getInstance();
         this._id = generadorId.generateUniqueId();
@@ -33,9 +33,6 @@ export class Reto{
         this._rutas = rutas;
         this._actividad = actividad;
         this._total = 0;
-        this._rutas.forEach( element =>
-            this._total += element.longitud
-        );
         this._usuarios = usuarios;
     }
 
@@ -67,14 +64,14 @@ export class Reto{
      * Getter del atributo privado _rutas
      * @return this._rutas
      */
-    get rutas(): Ruta[] {
+    get rutas(): string[] {
         return this._rutas;
     }
     /**
      * Setter del atributo privado _rutas
      * @param value Nuevo valor para el atributo _rutas
      */
-    set rutas(value: Ruta[]) {
+    set rutas(value: string[]) {
         this._rutas = value;
     }
     /****************************************************************************/
@@ -99,6 +96,13 @@ export class Reto{
      */
     get total(): number {
         return this._total;
+    }
+    /**
+     * Setter del atributo privado _total
+     * @param value Nuevo valor para el atributo _total
+     */
+    set total(value: Actividad) {
+        this._total = value;
     }
     /****************************************************************************/
     
