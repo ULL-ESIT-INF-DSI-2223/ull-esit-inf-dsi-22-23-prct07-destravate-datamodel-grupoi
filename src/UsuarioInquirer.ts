@@ -8,7 +8,6 @@ import {Ascendente_Descendente} from './index'
 import { Actividades } from "./index"
 
 const low = require('lowdb');
-const database = low(new FileSync('./src/json/database.json'));
 
 enum CommandsUsuario {
     Añadir_usuario = "Añadir usuario",
@@ -61,6 +60,7 @@ export async function promptUsuario(): Promise<void>{
 
 /*-----------------AÑADIR Usuario-----------------*/
 async function promptAddUsuario(): Promise<void> {
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     let nombre = ""
     let actividad: Actividad[] = []
@@ -150,6 +150,7 @@ async function promptAddUsuario(): Promise<void> {
 
 /*-----------------ELIMINAR USUARIO-----------------*/
 async function promptRemoveUsuario(): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear()
     const respuesta = await inquirer.prompt({
         type: 'input',
@@ -165,6 +166,7 @@ async function promptRemoveUsuario(): Promise<void>{
 // Especificar ascendente o descendente
 // 
 async function promptOrdenarUsuarios(): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     await inquirer.prompt({
         type: "list",
@@ -182,6 +184,7 @@ async function promptOrdenarUsuarios(): Promise<void>{
     })
 }
 async function promptUsuarioOrdenado(tipo: Usuario_Ordenar): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     await inquirer.prompt({
         type: "list",
@@ -224,6 +227,7 @@ async function promptUsuarioOrdenado(tipo: Usuario_Ordenar): Promise<void>{
 
 // Cambia parámetro
 async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     // Sacar el id de los usuarios para que escoja sus amigos 
     let amigos:string[] = [];
@@ -238,7 +242,7 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
     let jsonGrupo = database;
 
     for(let i in jsonGrupo.toJSON().grupos){
-        grupos.push(jsonGrupo.toJSON().grupos[i].id);
+        grupos.push(jsonGrupo.toJSON().grupos[i]._id);
     }
     
     // Sacar las rutas para que las elija el usuario
@@ -246,7 +250,7 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
     let jsonRuta = database;
     
     for(let i in jsonRuta.toJSON().rutas){
-        rutas.push(jsonRuta.toJSON().rutas[i].nombre);
+        rutas.push(jsonRuta.toJSON().rutas[i]._nombre);
     }
 
     if (enumerado === Usuario_enum.Nombre){
@@ -298,7 +302,7 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
             choices: Object.values(rutas)
         })
 
-        database.get('usuarios').find({_nombre: usuario}).set("_amigos", respuesta.rutas).write()
+        database.get('usuarios').find({_nombre: usuario}).set("_rutas", respuesta.rutas).write()
     }
 
     
@@ -307,6 +311,7 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
 }
 // Enseña todos los parámetros y escoge que quiere modificar
 async function modifyUsuario(): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     const respuesta_usuario = await inquirer.prompt({
         type: 'input',

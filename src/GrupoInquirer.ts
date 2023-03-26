@@ -8,7 +8,6 @@ import {Grupo} from './Grupo'
 /*-----------------------------------DATABASE----------------------------------- */
 
 const low = require('lowdb');
-const database = low(new FileSync('./src/json/database.json'));
 
 /*-----------------------------------COMANDOS----------------------------------- */
 
@@ -61,6 +60,7 @@ export async function promptGrupo(): Promise<void>{
 
 /*-----------------AÑADIR GRUPO-----------------*/
 async function promptAddGrupo(): Promise<void> {
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     let nombre = ""
 
@@ -100,6 +100,7 @@ async function promptAddGrupo(): Promise<void> {
 
 /*-----------------ELIMINAR GRUPO-----------------*/
 async function promptRemoveGrupo(): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear()
     const respuesta = await inquirer.prompt({
         type: 'input',
@@ -134,6 +135,7 @@ async function promptOrdenarGrupos(): Promise<void>{
     })
 }
 async function promptGrupoOrdenado(tipo: Grupo_Ordenar): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     await inquirer.prompt({
         type: "list",
@@ -182,6 +184,7 @@ async function promptGrupoOrdenado(tipo: Grupo_Ordenar): Promise<void>{
 
 // Cambia parámetro
 async function modifyParamGrupo(grupo: string, enumerado: Grupo_enum): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     let usuarios:string[] = []
     let jsonUsuario = database;

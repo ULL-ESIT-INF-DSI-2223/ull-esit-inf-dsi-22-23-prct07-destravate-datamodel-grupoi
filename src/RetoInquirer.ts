@@ -10,7 +10,6 @@ import { Reto } from './Reto';
 /*-----------------------------------DATABASE----------------------------------- */
 
 const low = require('lowdb');
-const database = low(new FileSync('./src/json/database.json'));
 
 /*-----------------------------------COMANDOS----------------------------------- */
 
@@ -65,6 +64,7 @@ export async function promptReto(): Promise<void>{
 
 /*-----------------AÑADIR RETO-----------------*/
 async function promptAddReto(): Promise<void> {
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     let nombre = ""
     let actividad = Actividad.Bicicleta, total = 0
@@ -139,6 +139,7 @@ async function promptAddReto(): Promise<void> {
 
 /*-----------------ELIMINAR RETO-----------------*/
 async function promptRemoveReto(): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear()
     const respuesta = await inquirer.prompt({
         type: 'input',
@@ -173,6 +174,7 @@ async function promptOrdenarRetos(): Promise<void>{
     })
 }
 async function promptRetoOrdenado(tipo: Reto_Ordenar): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     await inquirer.prompt({
         type: "list",
@@ -219,6 +221,7 @@ async function promptRetoOrdenado(tipo: Reto_Ordenar): Promise<void>{
 
 // Cambia parámetro
 async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     let jsonUsuario = database;
     let rutas_todas:string[] = []
@@ -241,7 +244,7 @@ async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void
             name: "nombre",
             message: "Introduzca nuevo nombre: "
         })
-        database.get('retos').find({nombre: reto}).set("nombre", respuesta.nombre).write()
+        database.get('retos').find({_nombre: reto}).set("_nombre", respuesta.nombre).write()
     }
     else if (enumerado === Reto_enum.Rutas){
         const respuesta = await inquirer.prompt({
@@ -278,9 +281,9 @@ async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void
             choices: Object.values(Actividades)
         })
         if(respuesta.actividad === "Bicicleta"){
-            database.get('retos').find({nombre: reto}).set("_actividad", 2).write()
+            database.get('retos').find({_nombre: reto}).set("_actividad", 1).write()
         }else{
-            database.get('retos').find({nombre: reto}).set("_actividad", 1).write()
+            database.get('retos').find({_nombre: reto}).set("_actividad", 0).write()
         }
     }
     promptReto();

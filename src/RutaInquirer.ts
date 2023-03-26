@@ -10,7 +10,6 @@ import { Ruta, Geolocalizacion } from './Ruta';
 /*-----------------------------------DATABASE----------------------------------- */
 
 const low = require('lowdb');
-const database = low(new FileSync('./src/json/database.json'));
 
 /*-----------------------------------COMANDOS----------------------------------- */
 
@@ -42,6 +41,7 @@ enum Ruta_Ordenar{
 
 /*-----------------------------------RUTAS----------------------------------- */
 export async function promptRuta(): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     inquirer.prompt({
         type: "list",
@@ -71,6 +71,7 @@ export async function promptRuta(): Promise<void>{
 
 /*-----------------AÑADIR RUTA-----------------*/
 async function promptAdd(): Promise<void> {
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     let nombre = ""
     let inicio_latitud = 0, inicio_longitud = 0, final_latitud = 0, final_longitud = 0, longitud = 0, desnivel = 0, calificacion = 0, actividad = Actividad.Bicicleta
@@ -170,6 +171,7 @@ async function promptAdd(): Promise<void> {
 
 /*-----------------ELIMINAR RUTA-----------------*/
 async function promptRemove(): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear()
     const respuesta = await inquirer.prompt({
         type: 'input',
@@ -208,6 +210,7 @@ async function promptOrdenarRutas(): Promise<void>{
     })
 }
 async function promptRutaOrdenada(tipo: Ruta_Ordenar): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
     await inquirer.prompt({
         type: "list",
@@ -262,6 +265,7 @@ async function promptRutaOrdenada(tipo: Ruta_Ordenar): Promise<void>{
 
 // Cambia parámetro
 async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
+    const database = low(new FileSync('./src/json/database.json'));
     console.clear();
 
     // Sacar el id de los usuarios para que modifique los usuarios

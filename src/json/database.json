@@ -248,6 +248,18 @@
         "id-12",
         "id-13"
       ]
+    },
+    {
+      "_id": "id-43",
+      "_nombre": "P",
+      "_rutas": [
+        "Ruta 2"
+      ],
+      "_actividad": 0,
+      "_total": 15,
+      "_usuarios": [
+        "id-7"
+      ]
     }
   ],
   "usuarios": [
@@ -977,7 +989,7 @@
   "ultimoidUnico": [
     {
       "nombre": "id_unico",
-      "id": 40
+      "id": 43
     }
   ]
 }
