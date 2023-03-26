@@ -161,6 +161,25 @@
       ],
       "_actividad": 1,
       "_calificacion": "3.2"
+    },
+    {
+      "_id": "id-33",
+      "_nombre": "La Laguna",
+      "_inicio": {
+        "latitud": "23.34",
+        "longitud": "45.4"
+      },
+      "_final": {
+        "latitud": "12.23",
+        "longitud": "34.45"
+      },
+      "_longitud": "130",
+      "_desnivel": "500",
+      "_usuarios": [
+        "id-14"
+      ],
+      "_actividad": 1,
+      "_calificacion": "10"
     }
   ],
   "retos": [
@@ -342,7 +361,7 @@
   "ultimoidUnico": [
     {
       "nombre": "id_unico",
-      "id": 32
+      "id": 33
     }
   ]
 }

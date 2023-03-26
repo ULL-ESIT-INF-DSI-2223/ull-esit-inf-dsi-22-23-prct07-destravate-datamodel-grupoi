@@ -4,8 +4,8 @@ import {Usuario} from "./Usuario"
 import { promptApp } from './index';
 import { Actividad } from "./Actividad";
 import FileSync from 'lowdb/adapters/FileSync';
-import { jsonTodoCollection } from './jsonTodoCollection';
 import {Ascendente_Descendente} from './index'
+import { Actividades } from "./index"
 
 const low = require('lowdb');
 const database = low(new FileSync('./src/json/database.json'));
@@ -24,15 +24,12 @@ enum Usuario_enum{
     Grupo = "Grupos",
     Rutas = "Rutas"
 }
-enum Actividades{
-    Correr = "Correr",
-    Bicicleta = "Bicicleta"
-}
 enum Usuario_Ordenar{
     Nombre = "Nombre",
     Total = "Total",
     Atras = "Atras"
 }
+
 export async function promptUsuario(): Promise<void>{
     console.clear();
     inquirer.prompt({
@@ -229,7 +226,7 @@ async function promptUsuarioOrdenado(tipo: Usuario_Ordenar): Promise<void>{
 
 }
 
-/*-----------------MODIFICAR RUTA-----------------*/
+/*-----------------MODIFICAR USUARIO-----------------*/
 
 // Cambia parámetro
 async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Promise<void>{

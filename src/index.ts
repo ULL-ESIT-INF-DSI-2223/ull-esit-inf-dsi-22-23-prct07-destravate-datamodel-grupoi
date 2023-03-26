@@ -41,7 +41,7 @@ enum Commands_Reto{
     Enseñar_retos = "Enseñar retos",
     Atras = "Atras"
 }
-enum Actividades{
+export enum Actividades{
     Correr = "Correr",
     Bicicleta = "Bicicleta"
 }
@@ -329,7 +329,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             message: "Introduzca nuevo nombre: "
         })
         database.get('rutas').find({_nombre: ruta}).set("_nombre", respuesta.nombre).write()
-        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Inicio){
         const respuesta = await inquirer.prompt([{
@@ -344,7 +343,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         }])
         const geo: Geolocalizacion = { latitud: respuesta.latitud, longitud: respuesta.longitud };
         database.get('rutas').find({_nombre: ruta}).set("_inicio", geo).write()
-        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Final){
         const respuesta = await inquirer.prompt([{
@@ -359,7 +357,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         }])
         const geo: Geolocalizacion = { latitud: respuesta.latitud, longitud: respuesta.longitud };
         database.get('rutas').find({_nombre: ruta}).set("_final", geo).write()
-        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Longitud){
         const respuesta = await inquirer.prompt({
@@ -368,7 +365,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             message: "Introduzca nueva longitud: "
         })
         database.get('rutas').find({_nombre: ruta}).set("_longitud", respuesta.longitud).write()
-        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Desnivel){
         const respuesta = await inquirer.prompt({
@@ -377,7 +373,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             message: "Introduzca nuevo desnivel: "
         })
         database.get('rutas').find({_nombre: ruta}).set("_desnivel", respuesta.desnivel).write()
-        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Calificacion){
         const respuesta = await inquirer.prompt({
@@ -386,7 +381,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             message: "Introduzca nueva calificacion: "
         })
         database.get('rutas').find({_nombre: ruta}).set("_calificacion", respuesta.calificacion).write()
-        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Actividad){
         const respuesta = await inquirer.prompt({
@@ -397,10 +391,8 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
         })
         if(respuesta.actividad === "Bicicleta"){
             database.get('rutas').find({_nombre: ruta}).set("_actividad", 2).write()
-            //colectionMain.loadRuta()
         }else{
             database.get('rutas').find({_nombre: ruta}).set("_actividad", 1).write()
-            //colectionMain.loadRuta()
         }
     }
     else if (enumerado === Ruta_enum.Usuarios){
@@ -411,7 +403,6 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             choices: Object.values(amigos)
         })
         database.get('rutas').find({_nombre: ruta}).set("_usuarios", respuesta.amigo).write()
-        //colectionMain.loadRuta()
     }
     promptRuta();
 
