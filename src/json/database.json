@@ -1,359 +1,378 @@
 {
   "rutas": [
     {
-      "nombre": "Ruta 1",
-      "inicio": {
+      "_nombre": "Ruta 1",
+      "_inicio": {
         "latitud": 40.45,
         "longitud": -4
       },
-      "final": {
+      "_final": {
         "latitud": 39.879,
         "longitud": -3.456
       },
-      "longitud": 10,
-      "desnivel": 600,
-      "usuario": [
+      "_longitud": 10,
+      "_desnivel": 600,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ],
-      "actividad": "Correr",
-      "calificacion": 7
+      "_actividad": "Correr",
+      "_calificacion": 7
     },
     {
-      "nombre": "Ruta 2",
-      "inicio": {
+      "_nombre": "Ruta 2",
+      "_inicio": {
         "latitud": 41.3851,
         "longitud": 2.1734
       },
-      "final": {
+      "_final": {
         "latitud": 41.3984,
         "longitud": 2.1741
       },
-      "longitud": 15,
-      "desnivel": 200,
-      "usuario": [
+      "_longitud": 15,
+      "_desnivel": 200,
+      "_usuarios": [
         "1",
         "2",
         "3",
         "4"
       ],
-      "actividad": "Bicicleta",
-      "calificacion": 4.5
+      "_actividad": "Bicicleta",
+      "_calificacion": 4.5
     },
     {
-      "nombre": "Ruta 3",
-      "inicio": {
+      "_nombre": "Ruta 3",
+      "_inicio": {
         "latitud": 40.4168,
         "longitud": -3.7038
       },
-      "final": {
+      "_final": {
         "latitud": 40.4799,
         "longitud": -3.7038
       },
-      "longitud": 8,
-      "desnivel": 300,
-      "usuario": [
+      "_longitud": 8,
+      "_desnivel": 300,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ],
-      "actividad": "Correr",
-      "calificacion": 4.2
+      "_actividad": "Correr",
+      "_calificacion": 4.2
     },
     {
-      "nombre": "Ruta 4",
-      "inicio": {
+      "_nombre": "Ruta 4",
+      "_inicio": {
         "latitud": 41.3851,
         "longitud": 2.1734
       },
-      "final": {
+      "_final": {
         "latitud": 41.3984,
         "longitud": 2.1741
       },
-      "longitud": 12,
-      "desnivel": 400,
-      "usuario": [
+      "_longitud": 12,
+      "_desnivel": 400,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ],
-      "actividad": "Bicicleta",
-      "calificacion": 8.9
+      "_actividad": "Bicicleta",
+      "_calificacion": 8.9
     },
     {
-      "nombre": "Ruta 5",
-      "inicio": {
+      "_nombre": "Ruta 5",
+      "_inicio": {
         "latitud": 40.4168,
         "longitud": -3.7038
       },
-      "final": {
+      "_final": {
         "latitud": 40.4799,
         "longitud": -3.7038
       },
-      "longitud": 20,
-      "desnivel": 700,
-      "usuario": [
+      "_longitud": 20,
+      "_desnivel": 700,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ],
-      "actividad": "Correr",
-      "calificacion": 5.4
+      "_actividad": "Correr",
+      "_calificacion": 5.4
     },
     {
-      "nombre": "Ruta 6",
-      "inicio": {
+      "_nombre": "Ruta 6",
+      "_inicio": {
         "latitud": 41.3851,
         "longitud": 2.1734
       },
-      "final": {
+      "_final": {
         "latitud": 41.3984,
         "longitud": 2.1741
       },
-      "longitud": 25,
-      "desnivel": 800,
-      "usuario": [
+      "_longitud": 25,
+      "_desnivel": 800,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ],
-      "actividad": "Bicicleta",
-      "calificacion": 9.5
+      "_actividad": "Bicicleta",
+      "_calificacion": 9.5
     },
     {
-      "nombre": "Ruta 7",
-      "inicio": {
+      "_nombre": "Ruta 7",
+      "_inicio": {
         "latitud": 40.4168,
         "longitud": -3.7038
       },
-      "final": {
+      "_final": {
         "latitud": 40.4799,
         "longitud": -3.7038
       },
-      "longitud": 18,
-      "desnivel": 600,
-      "usuario": [
+      "_longitud": 18,
+      "_desnivel": 600,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ],
-      "actividad": "Correr",
-      "calificacion": 9.8
+      "_actividad": "Correr",
+      "_calificacion": 9.8
     },
     {
-      "nombre": "Ruta 8",
-      "inicio": {
+      "_nombre": "Ruta 8",
+      "_inicio": {
         "latitud": 41.3851,
         "longitud": 2.1734
       },
-      "final": {
+      "_final": {
         "latitud": 41.3984,
         "longitud": 2.1741
       },
-      "longitud": 22,
-      "desnivel": 900,
-      "usuario": [
+      "_longitud": 22,
+      "_desnivel": 900,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ],
-      "actividad": "Bicicleta",
-      "calificacion": 6.5
+      "_actividad": "Bicicleta",
+      "_calificacion": 6.5
     },
     {
-      "nombre": "Ruta 9",
-      "inicio": {
+      "_nombre": "Ruta 9",
+      "_inicio": {
         "latitud": 40.4168,
         "longitud": -3.7038
       },
-      "final": {
+      "_final": {
         "latitud": 40.4799,
         "longitud": -3.7038
       },
-      "longitud": 30,
-      "desnivel": 1000,
-      "usuario": [
+      "_longitud": 30,
+      "_desnivel": 1000,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ],
-      "actividad": "Correr",
-      "calificacion": 7.3
+      "_actividad": "Correr",
+      "_calificacion": 7.3
     },
     {
-      "nombre": "Ruta 10",
-      "inicio": {
+      "_nombre": "Ruta 10",
+      "_inicio": {
         "latitud": 41.3851,
         "longitud": 2.1734
       },
-      "final": {
+      "_final": {
         "latitud": 41.3984,
         "longitud": 2.1741
       },
-      "longitud": 35,
-      "desnivel": 1100,
-      "usuario": [
+      "_longitud": 35,
+      "_desnivel": 1100,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ],
-      "actividad": "Bicicleta",
-      "calificacion": 3
+      "_actividad": "Bicicleta",
+      "_calificacion": 3
+    },
+    {
+      "_id": "id-25",
+      "_nombre": "Andalucia",
+      "_inicio": {
+        "latitud": "1",
+        "longitud": "2"
+      },
+      "_final": {
+        "latitud": "1",
+        "longitud": "2"
+      },
+      "_longitud": "3",
+      "_desnivel": "100",
+      "_usuarios": [
+        "id-16"
+      ],
+      "_actividad": 1,
+      "_calificacion": "10"
     }
   ],
   "retos": [
     {
-      "nombre": "Reto 1",
-      "rutas": [
+      "_nombre": "Reto 1",
+      "_rutas": [
         {
-          "nombre": "Ruta 9",
-          "inicio": {
+          "_nombre": "Ruta 9",
+          "_inicio": {
             "latitud": 40.4168,
             "longitud": -3.7038
           },
-          "final": {
+          "_final": {
             "latitud": 40.4799,
             "longitud": -3.7038
           },
-          "longitud": 30,
-          "desnivel": 1000,
-          "usuario": [
+          "_longitud": 30,
+          "_desnivel": 1000,
+          "_usuarios": [
             "1",
             "2",
             "3"
           ],
-          "actividad": "Correr",
-          "calificacion": 7.3
+          "_actividad": "Correr",
+          "_calificacion": 7.3
         },
         {
-          "nombre": "Ruta 7",
-          "inicio": {
+          "_nombre": "Ruta 7",
+          "_inicio": {
             "latitud": 40.4168,
             "longitud": -3.7038
           },
-          "final": {
+          "_final": {
             "latitud": 40.4799,
             "longitud": -3.7038
           },
-          "longitud": 18,
-          "desnivel": 600,
-          "usuario": [
+          "_longitud": 18,
+          "_desnivel": 600,
+          "_usuarios": [
             "1",
             "2",
             "3"
           ],
-          "actividad": "Correr",
-          "calificacion": 9.8
+          "_actividad": "Correr",
+          "_calificacion": 9.8
         }
       ],
-      "actividad": "Correr",
-      "total": 48,
-      "usuarios": [
+      "_actividad": "Correr",
+      "_total": 48,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ]
     },
     {
-      "nombre": "Reto 2",
+      "_nombre": "Reto 2",
       "rutas": [
         {
-          "nombre": "Ruta 10",
-          "inicio": {
+          "_nombre": "Ruta 10",
+          "_inicio": {
             "latitud": 41.3851,
             "longitud": 2.1734
           },
-          "final": {
+          "_final": {
             "latitud": 41.3984,
             "longitud": 2.1741
           },
-          "longitud": 35,
-          "desnivel": 1100,
-          "usuario": [
+          "_longitud": 35,
+          "_desnivel": 1100,
+          "_usuarios": [
             "1",
             "2",
             "3"
           ],
-          "actividad": "Bicicleta",
-          "calificacion": 3
+          "_actividad": "Bicicleta",
+          "_calificacion": 3
         },
         {
-          "nombre": "Ruta 6",
-          "inicio": {
+          "_nombre": "Ruta 6",
+          "_inicio": {
             "latitud": 41.3851,
             "longitud": 2.1734
           },
-          "final": {
+          "_final": {
             "latitud": 41.3984,
             "longitud": 2.1741
           },
-          "longitud": 25,
-          "desnivel": 800,
-          "usuario": [
+          "_longitud": 25,
+          "_desnivel": 800,
+          "_usuarios": [
             "1",
             "2",
             "3"
           ],
-          "actividad": "Bicicleta",
-          "calificacion": 9.5
+          "_actividad": "Bicicleta",
+          "_calificacion": 9.5
         }
       ],
-      "actividad": "Bicicleta",
-      "total": 60,
-      "usuarios": [
+      "_actividad": "Bicicleta",
+      "_total": 60,
+      "_usuarios": [
         "1",
         "2",
         "3"
       ]
     },
     {
-      "nombre": "Reto 3",
-      "rutas": [
+      "_nombre": "Reto 3",
+      "_rutas": [
         {
-          "nombre": "Ruta 1",
-          "inicio": {
+          "_nombre": "Ruta 1",
+          "_inicio": {
             "latitud": 40.45,
             "longitud": -4
           },
-          "final": {
+          "_final": {
             "latitud": 39.879,
             "longitud": -3.456
           },
-          "longitud": 10,
-          "desnivel": 600,
-          "usuario": [
+          "_longitud": 10,
+          "_desnivel": 600,
+          "_usuarios": [
             "1",
             "2",
             "3"
           ],
-          "actividad": "Correr",
-          "calificacion": 7
+          "_actividad": "Correr",
+          "_calificacion": 7
         },
         {
-          "nombre": "Ruta 3",
-          "inicio": {
+          "_nombre": "Ruta 3",
+          "_inicio": {
             "latitud": 40.4168,
             "longitud": -3.7038
           },
-          "final": {
+          "_final": {
             "latitud": 40.4799,
             "longitud": -3.7038
           },
-          "longitud": 8,
-          "desnivel": 300,
-          "usuario": [
+          "_longitud": 8,
+          "_desnivel": 300,
+          "_usuarios": [
             "1",
             "2",
             "3"
           ],
-          "actividad": "Correr",
-          "calificacion": 4.2
+          "_actividad": "Correr",
+          "_calificacion": 4.2
         }
       ],
-      "actividad": "Correr",
-      "total": 18,
-      "usuarios": [
+      "_actividad": "Correr",
+      "_total": 18,
+      "_usuarios": [
         "1",
         "2",
         "3"
@@ -418,13 +437,12 @@
     },
     {
       "_id": "id-17",
-      "_nombre": "Kevin",
+      "_nombre": "Juan",
       "_actividad": [
         1
       ],
       "_amigos": [
-        "id-14",
-        "id-16"
+        "id-17"
       ],
       "_grupos": [
         "id-03"
@@ -446,16 +464,16 @@
   ],
   "grupos": [
     {
-      "id": "id-03",
-      "nombre": "senderismoTenerife",
-      "miembros": [],
-      "rutasFav": []
+      "_id": "id-03",
+      "_nombre": "senderismoTenerife",
+      "_miembros": [],
+      "_rutasFav": []
     }
   ],
   "ultimoidUnico": [
     {
       "nombre": "id_unico",
-      "id": 19
+      "id": 25
     }
   ]
 }

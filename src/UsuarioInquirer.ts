@@ -5,6 +5,7 @@ import { promptApp } from './index';
 import { Actividad } from "./Actividad";
 import FileSync from 'lowdb/adapters/FileSync';
 import { jsonTodoCollection } from './jsonTodoCollection';
+import {Ascendente_Descendente} from './index'
 
 const low = require('lowdb');
 const database = low(new FileSync('./src/json/database.json'));
@@ -13,21 +14,25 @@ enum CommandsUsuario {
     Añadir_usuario = "Añadir usuario",
     Borrar_usuario = "Borrar usuario",
     Modificar_usuario = "Modificar usuario",
-    Enseñar_usuario = "Enseñar usuario",
+    Enseñar_usuario = "Enseñar usuarios",
     Quit = "Quit"
 }
 enum Usuario_enum{
     Nombre = "Nombre",
     Actividad = "Actividad",
-    Amigo = "Amigo",
-    Grupo = "Grupo",
+    Amigo = "Amigos",
+    Grupo = "Grupos",
     Rutas = "Rutas"
 }
 enum Actividades{
     Correr = "Correr",
     Bicicleta = "Bicicleta"
 }
-
+enum Usuario_Ordenar{
+    Nombre = "Nombre",
+    Total = "Total",
+    Atras = "Atras"
+}
 export async function promptUsuario(): Promise<void>{
     console.clear();
     inquirer.prompt({
@@ -47,10 +52,10 @@ export async function promptUsuario(): Promise<void>{
                 promptRemoveUsuario();
                 break;
             case CommandsUsuario.Enseñar_usuario:
-                //displayRutaList();
+                promptOrdenarUsuarios();
                 break;
             case CommandsUsuario.Modificar_usuario:
-                //modifyRuta();
+                modifyUsuario();
                 break;
         }
     })
@@ -165,18 +170,63 @@ async function promptRemoveUsuario(): Promise<void>{
 }
 
 /*-----------------ENSEÑAR USUARIOS-----------------*/
-async function displayRutaList(): Promise<void>{
+// Enseñar opciones de enseñar usuarios
+// Especificar ascendente o descendente
+// 
+async function promptOrdenarUsuarios(): Promise<void>{
     console.clear();
-    console.log(`Rutas: `);
-
-    console.log(JSON.stringify(database.get('rutas').sortBy('calificacion').reverse().value(), null, '\t'));
+    await inquirer.prompt({
+        type: "list",
+        name: "command",
+        message: "Ordenar por: ",
+        choices: Object.values(Usuario_Ordenar)
+    }).then(async answers => {
+        if (answers["command"] === Usuario_Ordenar.Atras){
+            promptUsuario();            
+        }else if (answers["command"] === Usuario_Ordenar.Nombre){
+            promptUsuarioOrdenado(Usuario_Ordenar.Nombre);
+        }else if (answers["command"] === Usuario_Ordenar.Total){
+            promptUsuarioOrdenado(Usuario_Ordenar.Total);
+        }
+    })
+}
+async function promptUsuarioOrdenado(tipo: Usuario_Ordenar): Promise<void>{
+    console.clear();
+    await inquirer.prompt({
+        type: "list",
+        name: "command",
+        message: "Choose option",
+        choices: Object.values(Ascendente_Descendente)
+    }).then(async answers => {
+        if (answers["command"] === Ascendente_Descendente.Ascendente){
+            if (tipo === Usuario_Ordenar.Nombre){
+                console.log(JSON.stringify(database.get('usuarios').sortBy('_nombre').value(), null, '\t'));
+            }else if (tipo === Usuario_Ordenar.Total){ //CANTIDAD DE KM REALIZADOS
+                console.log(JSON.stringify(database.get('usuarios').sortBy('_estadisticas').value(), null, '\t'));
+            }else{
+                promptUsuario();
+            }
+        } else{
+            if (tipo === Usuario_Ordenar.Nombre){
+                console.log(JSON.stringify(database.get('usuarios').sortBy('_nombre').reverse().value(), null, '\t'));
+            }else if (tipo === Usuario_Ordenar.Total){
+                console.log(JSON.stringify(database.get('usuarios').sortBy('_estadisticas').reverse().value(), null, '\t'));
+            }else{
+                promptUsuario();
+            }
+        }
+    })
+    console.log("\n")
     const respuesta = await inquirer.prompt({
         type: 'list',
         name: 'ruta',
         message: 'Presione el botón para salir:',
-        choices: ["Quit"]
+        choices: ["Salir"]
+    }).then(async answers => {
+        console.clear();
+        promptUsuario();
     });
-    promptUsuario();
+
 }
 
 /*-----------------MODIFICAR RUTA-----------------*/
@@ -214,7 +264,7 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
             name: "nombre",
             message: "Introduzca nuevo nombre: "
         })
-        database.get('usuarios').find({nombre: usuario}).set("nombre", respuesta.nombre).write()
+        database.get('usuarios').find({_nombre: usuario}).set("_nombre", respuesta.nombre).write()
     }
     else if (enumerado === Usuario_enum.Actividad){
         const respuesta = await inquirer.prompt({
@@ -224,9 +274,9 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
             choices: Object.values(Actividades)
         })
         if(respuesta.actividad === "Bicicleta"){
-            database.get('usuarios').find({nombre: usuario}).set("actividad", "Bicicleta").write()
+            database.get('usuarios').find({_nombre: usuario}).set("_actividad", "Bicicleta").write()
         }else{
-            database.get('usuarios').find({nombre: usuario}).set("actividad", "Correr").write()
+            database.get('usuarios').find({_nombre: usuario}).set("_actividad", "Correr").write()
         }
     }
     else if (enumerado === Usuario_enum.Amigo){
@@ -237,7 +287,7 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
             choices: Object.values(amigos)
         })
 
-        database.get('usuarios').find({nombre: usuario}).set("amigos", respuesta.amigos).write()
+        database.get('usuarios').find({_nombre: usuario}).set("_amigos", respuesta.amigos).write()
     }
     else if (enumerado === Usuario_enum.Grupo){
         const respuesta = await inquirer.prompt({
@@ -247,7 +297,7 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
             choices: Object.values(grupos)
         })
 
-        database.get('usuarios').find({nombre: usuario}).set("grupos", respuesta.grupos).write()
+        database.get('usuarios').find({_nombre: usuario}).set("_grupos", respuesta.grupos).write()
     }
     else if (enumerado === Usuario_enum.Rutas){
         const respuesta = await inquirer.prompt({
@@ -257,7 +307,7 @@ async function modifyParamUsuario(usuario: string, enumerado: Usuario_enum): Pro
             choices: Object.values(rutas)
         })
 
-        database.get('usuarios').find({nombre: usuario}).set("amigos", respuesta.rutas).write()
+        database.get('usuarios').find({_nombre: usuario}).set("_amigos", respuesta.rutas).write()
     }
 
     

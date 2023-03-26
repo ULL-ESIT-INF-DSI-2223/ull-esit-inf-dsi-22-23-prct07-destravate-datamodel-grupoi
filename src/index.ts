@@ -11,7 +11,7 @@ import { GeneradorIdUnicos } from './GeneradorIdUnicos';
 
 const low = require('lowdb');
 const database = low(new FileSync('./src/json/database.json'));
-const colectionMain = new jsonTodoCollection();
+//const colectionMain = new jsonTodoCollection();
 
 /*-----------------------------------COMANDOS----------------------------------- */
 enum Options{
@@ -51,6 +51,7 @@ enum Ruta_enum{
     Final = "Final",
     Longitud = "Longitud",
     Desnivel = "Desnivel",
+    Usuarios = "Usuarios",
     Actividad = "Actividad",
     Calificacion = "Calificacion"
 }
@@ -84,7 +85,7 @@ enum Reto_Ordenar{
     Total = "Cantidad de kilómetros",
     Atras = "Atras"
 }
-enum Ascendente_Descendente{
+export enum Ascendente_Descendente{
     Ascendente = "Ascendente",
     Descendente = "Descendente"
 }
@@ -123,7 +124,7 @@ async function promptAdd(): Promise<void> {
     console.clear();
     let nombre = ""
     let inicio_latitud = 0, inicio_longitud = 0, final_latitud = 0, final_longitud = 0, longitud = 0, desnivel = 0, calificacion = 0, actividad = Actividad.Bicicleta
-    // Sacar el id de los usuarios para que escoja sus amigos 
+    // Sacar el id de los usuarios para que escoja sus usuarios 
     let amigos:string[] = [];
     let jsonUsuario = database;
     
@@ -209,24 +210,7 @@ async function promptAdd(): Promise<void> {
     const final_var: Geolocalizacion = { latitud: final_latitud, longitud: final_longitud };
 
     const new_ruta = new Ruta(nombre, inicio_var, final_var, longitud, desnivel, amigos, actividad, calificacion);
-    /* {
-        "nombre": nombre,
-        "inicio": {
-          "latitud": inicio_latitud,
-          "longitud": inicio_longitud
-        },
-        "final": {
-          "latitud": final_latitud,
-          "longitud": final_longitud
-        },
-        "longitud": longitud,
-        "desnivel": desnivel,
-        "usuario": [
-          "1"
-        ],
-        "actividad": actividad,
-        "calificacion": calificacion
-    }*/
+    
     const numberString = new_ruta.id.replace(/^id-/, '');
     const lastId = parseInt(numberString);
     database.get('ultimoidUnico').find({nombre: "id_unico"}).set("id", lastId).write();
@@ -242,7 +226,7 @@ async function promptRemove(): Promise<void>{
         name: 'ruta',
         message: 'Escribe el nombre de la ruta que deseas eliminar: ',
     });
-    database.get('rutas').remove({nombre: respuesta.ruta}).write();
+    database.get('rutas').remove({_nombre: respuesta.ruta}).write();
     promptRuta();
 }
 
@@ -283,29 +267,29 @@ async function promptRutaOrdenada(tipo: Ruta_Ordenar): Promise<void>{
     }).then(async answers => {
         if (answers["command"] === Ascendente_Descendente.Ascendente){
             if (tipo === Ruta_Ordenar.Nombre){
-                console.log(JSON.stringify(database.get('rutas').sortBy('nombre').value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy('_nombre').value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Longitud){
-                console.log(JSON.stringify(database.get('rutas').sortBy('longitud').value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy('_longitud').value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Actividad){
-                console.log(JSON.stringify(database.get('rutas').sortBy('actividad').value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy('_actividad').value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Calificacion){
-                console.log(JSON.stringify(database.get('rutas').sortBy('calificacion').value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy('_calificacion').value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Usuarios){
-                console.log(JSON.stringify(database.get('rutas').sortBy((ruta: any) => ruta.usuario.length).value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy((ruta: any) => ruta._usuarios.length).value(), null, '\t'));
             }else{
                 promptRuta();
             }
         } else{
             if (tipo === Ruta_Ordenar.Nombre){
-                console.log(JSON.stringify(database.get('rutas').sortBy('nombre').reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy('_nombre').reverse().value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Longitud){
-                console.log(JSON.stringify(database.get('rutas').sortBy('longitud').reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy('_longitud').reverse().value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Actividad){
-                console.log(JSON.stringify(database.get('rutas').sortBy('actividad').reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy('_actividad').reverse().value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Calificacion){
-                console.log(JSON.stringify(database.get('rutas').sortBy('calificacion').reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy('_calificacion').reverse().value(), null, '\t'));
             }else if (tipo === Ruta_Ordenar.Usuarios){
-                console.log(JSON.stringify(database.get('rutas').sortBy((ruta: any) => ruta.usuario.length).reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('rutas').sortBy((ruta: any) => ruta._usuarios.length).reverse().value(), null, '\t'));
             }else{
                 promptRuta();
             }
@@ -330,14 +314,22 @@ async function promptRutaOrdenada(tipo: Ruta_Ordenar): Promise<void>{
 async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
     console.clear();
 
+    // Sacar el id de los usuarios para que modifique los usuarios
+    let amigos:string[] = [];
+    let jsonUsuario = database;
+    
+    for(let i in jsonUsuario.toJSON().usuarios){
+        amigos.push(jsonUsuario.toJSON().usuarios[i]._id);
+    }
+
     if (enumerado === Ruta_enum.Nombre){
         const respuesta = await inquirer.prompt({
             type: "input",
             name: "nombre",
             message: "Introduzca nuevo nombre: "
         })
-        database.get('rutas').find({nombre: ruta}).set("+", respuesta.nombre).write()
-        colectionMain.loadRuta()
+        database.get('rutas').find({_nombre: ruta}).set("_nombre", respuesta.nombre).write()
+        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Inicio){
         const respuesta = await inquirer.prompt([{
@@ -350,9 +342,9 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             name: "longitud",
             message: "Introduce la nueva longitud del inicio: "
         }])
-        const geo: Geolocalizacion = { latitud: Number(respuesta.latitud), longitud: Number(respuesta.longitud) };
-        database.get('rutas').find({nombre: ruta}).set("inicio", geo).write()
-        colectionMain.loadRuta()
+        const geo: Geolocalizacion = { latitud: respuesta.latitud, longitud: respuesta.longitud };
+        database.get('rutas').find({_nombre: ruta}).set("_inicio", geo).write()
+        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Final){
         const respuesta = await inquirer.prompt([{
@@ -365,9 +357,9 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             name: "longitud",
             message: "Introduce la nueva longitud del final: "
         }])
-        const geo: Geolocalizacion = { latitud: Number(respuesta.latitud), longitud: Number(respuesta.longitud) };
-        database.get('rutas').find({nombre: ruta}).set("final", geo).write()
-        colectionMain.loadRuta()
+        const geo: Geolocalizacion = { latitud: respuesta.latitud, longitud: respuesta.longitud };
+        database.get('rutas').find({_nombre: ruta}).set("_final", geo).write()
+        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Longitud){
         const respuesta = await inquirer.prompt({
@@ -375,8 +367,8 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             name: "longitud",
             message: "Introduzca nueva longitud: "
         })
-        database.get('rutas').find({nombre: ruta}).set("longitud", parseInt(respuesta.longitud)).write()
-        colectionMain.loadRuta()
+        database.get('rutas').find({_nombre: ruta}).set("_longitud", respuesta.longitud).write()
+        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Desnivel){
         const respuesta = await inquirer.prompt({
@@ -384,8 +376,8 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             name: "desnivel",
             message: "Introduzca nuevo desnivel: "
         })
-        database.get('rutas').find({nombre: ruta}).set("desnivel", parseInt(respuesta.desnivel)).write()
-        colectionMain.loadRuta()
+        database.get('rutas').find({_nombre: ruta}).set("_desnivel", respuesta.desnivel).write()
+        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Calificacion){
         const respuesta = await inquirer.prompt({
@@ -393,8 +385,8 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             name: "calificacion",
             message: "Introduzca nueva calificacion: "
         })
-        database.get('rutas').find({nombre: ruta}).set("calificacion", parseInt(respuesta.calificacion)).write()
-        colectionMain.loadRuta()
+        database.get('rutas').find({_nombre: ruta}).set("_calificacion", respuesta.calificacion).write()
+        //colectionMain.loadRuta()
     }
     else if (enumerado === Ruta_enum.Actividad){
         const respuesta = await inquirer.prompt({
@@ -404,12 +396,22 @@ async function modifyParam(ruta: string, enumerado: Ruta_enum): Promise<void>{
             choices: Object.values(Actividades)
         })
         if(respuesta.actividad === "Bicicleta"){
-            database.get('rutas').find({nombre: ruta}).set("actividad", "Bicicleta").write()
-            colectionMain.loadRuta()
+            database.get('rutas').find({_nombre: ruta}).set("_actividad", 2).write()
+            //colectionMain.loadRuta()
         }else{
-            database.get('rutas').find({nombre: ruta}).set("actividad", "Correr").write()
-            colectionMain.loadRuta()
+            database.get('rutas').find({_nombre: ruta}).set("_actividad", 1).write()
+            //colectionMain.loadRuta()
         }
+    }
+    else if (enumerado === Ruta_enum.Usuarios){
+        const respuesta = await inquirer.prompt({
+            type: 'checkbox',
+            name: 'amigo',
+            message: 'Escoge que usuarios han relizado la ruta: ',
+            choices: Object.values(amigos)
+        })
+        database.get('rutas').find({_nombre: ruta}).set("_usuarios", respuesta.amigo).write()
+        //colectionMain.loadRuta()
     }
     promptRuta();
 
@@ -450,6 +452,9 @@ async function modifyRuta(): Promise<void>{
                 break;
             case Ruta_enum.Calificacion:
                 modifyParam(ruta, Ruta_enum.Calificacion);
+                break;
+            case Ruta_enum.Usuarios:
+                modifyParam(ruta, Ruta_enum.Usuarios);
                 break;
         }
     })
@@ -627,7 +632,7 @@ async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void
             message: "Introduzca nuevo nombre: "
         })
         database.get('retos').find({nombre: reto}).set("nombre", respuesta.nombre).write()
-        colectionMain.loadReto()
+        //colectionMain.loadReto()
     }
     else if (enumerado === Reto_enum.Rutas){
         const respuesta = await inquirer.prompt({
@@ -637,7 +642,7 @@ async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void
         })
         // ESTO NO ESTÁ BIEN
         database.get('retos').find({nombre: reto}).set("rutas", parseInt(respuesta.rutas)).write()
-        colectionMain.loadReto()
+        //colectionMain.loadReto()
     }
     else if (enumerado === Reto_enum.Actividad){
         const respuesta = await inquirer.prompt({
@@ -648,10 +653,10 @@ async function modifyParamReto(reto: string, enumerado: Reto_enum): Promise<void
         })
         if(respuesta.actividad === "Bicicleta"){
             database.get('retos').find({nombre: reto}).set("actividad", "Bicicleta").write()
-            colectionMain.loadReto()
+            //colectionMain.loadReto()
         }else{
             database.get('retos').find({nombre: reto}).set("actividad", "Correr").write()
-            colectionMain.loadReto()
+            //colectionMain.loadReto()
         }
     }
     promptReto();
@@ -835,7 +840,7 @@ async function modifyParamGrupo(grupo: string, enumerado: Grupo_enum): Promise<v
             message: "Introduzca nuevo nombre: "
         })
         database.get('grupos').find({nombre: grupo}).set("nombre", respuesta.nombre).write()
-        colectionMain.loadReto()
+        //colectionMain.loadReto()
     }
     promptGrupo();
 
