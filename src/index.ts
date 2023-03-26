@@ -4,15 +4,14 @@ import {Ruta} from "./Ruta"
 import { Geolocalizacion } from "./Ruta";
 import { Actividad } from "./Actividad";
 import FileSync from 'lowdb/adapters/FileSync';
-import { jsonTodoCollection } from './jsonTodoCollection';
 import { promptUsuario } from './UsuarioInquirer';
 import { GeneradorIdUnicos } from './GeneradorIdUnicos';
 import { Reto } from './Reto';
+import { Grupo } from './Grupo'
 /*-----------------------------------DATABASE----------------------------------- */
 
 const low = require('lowdb');
 const database = low(new FileSync('./src/json/database.json'));
-//const colectionMain = new jsonTodoCollection();
 
 /*-----------------------------------COMANDOS----------------------------------- */
 enum Options{
@@ -64,8 +63,7 @@ enum Reto_enum{
 }
 enum Grupo_enum{
     Nombre = "Nombre",
-    Miembros = "Miembros",
-    Total = "Total"
+    Miembros = "Miembros"
 }
 enum Ruta_Ordenar{
     Nombre = "Nombre",
@@ -779,23 +777,37 @@ async function promptGrupo(): Promise<void>{
 async function promptAddGrupo(): Promise<void> {
     console.clear();
     let nombre = ""
+
+    // Sacar el id de los usuarios para que escoja sus amigos 
+    let usuarios:string[] = [];
+    let jsonUsuario = database;
+    
+    for(let i in jsonUsuario.toJSON().usuarios){
+        usuarios.push(jsonUsuario.toJSON().usuarios[i]._id);
+    }
+
     const answers = await inquirer.prompt([
     {
         type: "input",
         name: "name",
         message: "Introduce el nombre del grupo: "
     },
+    {
+        type: "checkbox",
+        name: "usuarios",
+        message: "Escoge los miembros del grupo: ",
+        choices: Object.values(usuarios)
+    },
     ]).then((answers) => {
             nombre = answers.name;
+            usuarios = answers.usuarios;
     })
 
-    // Aqui el total deberia tener otra forma ya que se deberia recorrer las rutas y calcularlo
-    const new_grupo = {
-        "nombre": nombre,
-        "miembrosID": [
-            "1"
-        ]
-    }
+    const new_grupo = new Grupo(nombre, usuarios)
+
+    const numberString = new_grupo.id.replace(/^id-/, '');
+    const lastId = parseInt(numberString);
+    database.get('ultimoidUnico').find({nombre: "id_unico"}).set("id", lastId).write();
     database.get('grupos').push(new_grupo).write();
     promptGrupo();
 }
@@ -808,7 +820,7 @@ async function promptRemoveGrupo(): Promise<void>{
         name: 'grupo',
         message: 'Escribe el nombre del grupo que deseas eliminar: ',
     });
-    database.get('grupos').remove({nombre: respuesta.grupo}).write();
+    database.get('grupos').remove({_nombre: respuesta.grupo}).write();
     promptGrupo();
 }
 
@@ -848,10 +860,9 @@ async function promptGrupoOrdenado(tipo: Grupo_Ordenar): Promise<void>{
                 console.log(JSON.stringify(database.get('grupos').sortBy('nombre').value(), null, '\t'));
             }else if (tipo === Grupo_Ordenar.Miembros){
                 console.log("Funcion no implementada")
-                //console.log(JSON.stringify(database.get('grupos').sortBy((reto: any) => reto.usuario.length).value(), null, '\t'));
+                console.log(JSON.stringify(database.get('grupos').sortBy((reto: any) => reto._miembrosID.length).value(), null, '\t'));
             }else if (tipo === Grupo_Ordenar.Total){
-                console.log("Funcion no implementada")
-                //console.log(JSON.stringify(database.get('grupos').sortBy('total').value(), null, '\t'));
+                console.log(JSON.stringify(database.get('grupos').sortBy('_estadisticas').value(), null, '\t'));
             }else{
                 promptGrupo();
             }
@@ -860,10 +871,9 @@ async function promptGrupoOrdenado(tipo: Grupo_Ordenar): Promise<void>{
                 console.log(JSON.stringify(database.get('grupos').sortBy('nombre').reverse().value(), null, '\t'));
             }else if (tipo === Grupo_Ordenar.Miembros){
                 console.log("Funcion no implementada")
-                //console.log(JSON.stringify(database.get('grupos').sortBy((reto: any) => reto.usuario.length).reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('grupos').sortBy((reto: any) => reto._miembrosID.length).reverse().value(), null, '\t'));
             }else if (tipo === Grupo_Ordenar.Total){
-                console.log("Funcion no implementada")
-                //console.log(JSON.stringify(database.get('grupos').sortBy('total').reverse().value(), null, '\t'));
+                console.log(JSON.stringify(database.get('grupos').sortBy('_estadisticas').reverse().value(), null, '\t'));
             }else{
                 promptGrupo();
             }
@@ -887,15 +897,30 @@ async function promptGrupoOrdenado(tipo: Grupo_Ordenar): Promise<void>{
 // Cambia parámetro
 async function modifyParamGrupo(grupo: string, enumerado: Grupo_enum): Promise<void>{
     console.clear();
+    let usuarios:string[] = []
+    let jsonUsuario = database;
 
+    for (let i in jsonUsuario.toJSON().usuarios){
+        usuarios.push(jsonUsuario.toJSON().usuarios[i]._id)
+    }
     if (enumerado === Grupo_enum.Nombre){
         const respuesta = await inquirer.prompt({
             type: "input",
             name: "nombre",
             message: "Introduzca nuevo nombre: "
         })
-        database.get('grupos').find({nombre: grupo}).set("nombre", respuesta.nombre).write()
-        //colectionMain.loadReto()
+        database.get('grupos').find({_nombre: grupo}).set("_nombre", respuesta.nombre).write()
+    }
+    else if (enumerado === Grupo_enum.Miembros){
+        const respuesta = await inquirer.prompt({
+            type: "checkbox",
+            name: "usuarios",
+            message: "Selecciona los usuarios que realizan este reto: ",
+            choices: Object.values(usuarios)
+        }).then((answers) =>{
+            usuarios = answers.usuarios
+            database.get('grupos').find({_nombre: grupo}).set("_miembrosID", usuarios).write()
+        })
     }
     promptGrupo();
 
@@ -921,9 +946,6 @@ async function modifyGrupo(): Promise<void>{
                 break; 
             case Grupo_enum.Miembros:
                 modifyParamGrupo(grupo, Grupo_enum.Miembros);
-                break;
-            case Grupo_enum.Total:
-                modifyParamGrupo(grupo, Grupo_enum.Total);
                 break;
         }
     })

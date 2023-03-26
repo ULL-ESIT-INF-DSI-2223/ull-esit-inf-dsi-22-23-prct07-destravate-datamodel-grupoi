@@ -293,16 +293,56 @@
   ],
   "grupos": [
     {
-      "_id": "id-03",
-      "_nombre": "senderismoTenerife",
-      "_miembros": [],
-      "_rutasFav": []
+      "_id": "id-30",
+      "_nombre": "Grupo 1",
+      "_miembrosID": [
+        "id-14",
+        "id-17"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_ranking": [
+        "id-14",
+        "id-16"
+      ],
+      "_rutasFav": [],
+      "_historicoRutas": {}
+    },
+    {
+      "_id": "id-32",
+      "_nombre": "Grupo 2",
+      "_miembrosID": [
+        "id-14",
+        "id-16",
+        "id-17"
+      ],
+      "_estadisticas": {
+        "kmAcumuladosSemana": 0,
+        "desnivelAcumuladoSemana": 0,
+        "kmAcumuladosMes": 0,
+        "desnivelAcumuladoMes": 0,
+        "kmAcumuladosAnio": 0,
+        "desnivelAcumuladoAnio": 0
+      },
+      "_ranking": [
+        "id-14",
+        "id-16",
+        "id-17"
+      ],
+      "_rutasFav": [],
+      "_historicoRutas": {}
     }
   ],
   "ultimoidUnico": [
     {
       "nombre": "id_unico",
-      "id": 29
+      "id": 32
     }
   ]
 }
